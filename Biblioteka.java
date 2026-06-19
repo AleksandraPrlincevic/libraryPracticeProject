@@ -14,12 +14,17 @@ import java.util.ArrayList;
 public class Biblioteka {
 
     private ArrayList<Knjiga>listaKnjiga;
+    private ArrayList<Korisnik> listaKorisnika;
 
-    public Biblioteka(ArrayList<Knjiga> listaKnjiga){
+    public Biblioteka(ArrayList<Knjiga> listaKnjiga, ArrayList<Korisnik> listaKorisnika){
         if(listaKnjiga== null){
             throw  new NullPointerException("Biblioteka mora posedovati listu knjiga!");
         } this.listaKnjiga=listaKnjiga;
+        if(listaKorisnika== null){
+            throw  new NullPointerException("Biblioteka mora posedovati listu korisnika!");
+        } this.listaKorisnika=listaKorisnika;
     }
+
    public int ukupnoPozajmica(){
         return Pozajmica.getUkupanBrPozajmica();
     }
@@ -34,6 +39,15 @@ public class Biblioteka {
     public void setListaKnjiga(ArrayList<Knjiga> listaKnjiga) {
         this.listaKnjiga = listaKnjiga;
     }
+
+    public ArrayList<Korisnik> getListaKorisnika() {
+        return listaKorisnika;
+    }
+
+    public void setListaKorisnika(ArrayList<Korisnik> listaKorisnika) {
+        this.listaKorisnika = listaKorisnika;
+    }
+
 
     @Override
     public String toString() {
