@@ -9,6 +9,7 @@ najpopularnija knjiga (po tvom kriterijumu)
 uklanjanje knjige
 filtriranje “popularnih”*/
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Biblioteka {
@@ -31,7 +32,9 @@ public class Biblioteka {
     public void izdajKnjigu(Pozajmica p){
         p.getKnjiga().povecajBrPozajmica();
     }
-
+    public void vratiKnjigu(Pozajmica p) {
+        p.setDanVracanja(LocalDate.now());
+    }
     public ArrayList<Knjiga> getListaKnjiga() {
         return listaKnjiga;
     }
