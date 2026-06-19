@@ -82,11 +82,12 @@ public class Main {
         Knjiga k2 = new Knjiga("Sidarta",  "Herman Hesse", 164, 0);
         Knjiga k3 = new Knjiga("Slikar prolaznog sveta", "Kazuo Ishiguro", 230, 0);
 
-        Pozajmica p1 = new Pozajmica("Petar",k1, LocalDate.of(2026,4,28));
-        Pozajmica p2 = new Pozajmica("Maja",k2, LocalDate.of(2026,4,1));
-        Pozajmica p3 = new Pozajmica("Luka",k3, LocalDate.of(2026,5,7));
+        Pozajmica p1 = new Pozajmica("Petar",k1, LocalDate.now(), null);
+        Pozajmica p2 = new Pozajmica("Maja",k2, LocalDate.of(2026,4,1), null);
+        Pozajmica p3 = new Pozajmica("Luka",k3, LocalDate.of(2026,5,7), null);
         System.out.println(Pozajmica.getBrPozajmica());
 
-        System.out.println(k1);
+        System.out.println(p1);
+        System.out.println(p2);
     }
 }

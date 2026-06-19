@@ -17,18 +17,20 @@ public class Pozajmica {
     private String korisnik;
     private Knjiga knjiga;
     private LocalDate danIzdavanja;
+    private LocalDate danVracanja;
 
-    public Pozajmica(String korisnik, Knjiga knjiga, LocalDate danIzdavanja){
+    public Pozajmica(String korisnik, Knjiga knjiga, LocalDate danIzdavanja, LocalDate danVracanja){
         this.korisnik=korisnik;
         this.knjiga=knjiga;
         this.danIzdavanja=danIzdavanja;
+        this.danVracanja = danVracanja;
         brPozajmica++;
     }
 
   public static int getBrPozajmica(){
         return brPozajmica;
   }
-git
+
   public int izracunajBrDana(){
         long brDana= ChronoUnit.DAYS.between(danIzdavanja, LocalDate.now());
         return (int)brDana;
@@ -61,12 +63,21 @@ git
         this.danIzdavanja = danIzdavanja;
     }
 
+    public LocalDate getDanVracanja() {
+        return danVracanja;
+    }
+    public void setDanVracanja(LocalDate danVracanja) {
+        this.danVracanja = danVracanja;
+    }
+
     @Override
     public String toString() {
         return "Pozajmica{" +
                 "korisnik='" + korisnik + '\'' +
                 ", knjiga='" + getKnjiga().getNaslov() + '\'' +
-                ", brDana=" + danIzdavanja +
+                ", brDana=" + izracunajBrDana()  +
+                ", danIzdavanja=" + getDanIzdavanja()  +
+                ", danVracanja=" + getDanVracanja()  +
                 '}';
     }
 }
