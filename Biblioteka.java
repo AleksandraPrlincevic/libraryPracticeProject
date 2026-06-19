@@ -16,14 +16,15 @@ public class Biblioteka {
 
     private ArrayList<Knjiga>listaKnjiga;
     private ArrayList<Korisnik> listaKorisnika;
-
-    public Biblioteka(ArrayList<Knjiga> listaKnjiga, ArrayList<Korisnik> listaKorisnika){
+    private ArrayList<Pozajmica> listaPozajmica;
+    public Biblioteka(ArrayList<Knjiga> listaKnjiga, ArrayList<Korisnik> listaKorisnika, ArrayList<Pozajmica> listaPozajmica){
         if(listaKnjiga== null){
             throw  new NullPointerException("Biblioteka mora posedovati listu knjiga!");
         } this.listaKnjiga=listaKnjiga;
         if(listaKorisnika== null){
             throw  new NullPointerException("Biblioteka mora posedovati listu korisnika!");
         } this.listaKorisnika=listaKorisnika;
+        this.listaPozajmica=listaPozajmica;
     }
 
    public int ukupnoPozajmica(){
