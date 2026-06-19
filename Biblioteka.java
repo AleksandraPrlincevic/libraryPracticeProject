@@ -21,7 +21,7 @@ public class Biblioteka {
         } this.listaKnjiga=listaKnjiga;
     }
    public int ukupnoPozajmica(){
-        return Pozajmica.getBrPozajmica();
+        return Pozajmica.getUkupanBrPozajmica();
     }
     public void izdajKnjigu(Pozajmica p){
         p.getKnjiga().povecajBrPozajmica();

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class Pozajmica {
-    private static int brPozajmica;
+    private static int ukupanBrPozajmica;
     private String korisnik;
     private Knjiga knjiga;
     private LocalDate danIzdavanja;
@@ -24,11 +24,11 @@ public class Pozajmica {
         this.knjiga=knjiga;
         this.danIzdavanja=danIzdavanja;
         this.danVracanja = danVracanja;
-        brPozajmica++;
+        ukupanBrPozajmica++;
     }
 
-  public static int getBrPozajmica(){
-        return brPozajmica;
+  public static int getUkupanBrPozajmica(){
+        return ukupanBrPozajmica;
   }
 
   public int izracunajBrDana(){

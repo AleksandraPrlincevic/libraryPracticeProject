@@ -74,6 +74,7 @@ OOP optimizacije
 i QA edge-case korekcije*/
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -82,12 +83,20 @@ public class Main {
         Knjiga k2 = new Knjiga("Sidarta",  "Herman Hesse", 164, 0);
         Knjiga k3 = new Knjiga("Slikar prolaznog sveta", "Kazuo Ishiguro", 230, 0);
 
+        ArrayList<Knjiga> listaKnjiga= new ArrayList<>();
+        listaKnjiga.add(k1);
+        listaKnjiga.add(k2);
+        listaKnjiga.add(k3);
+
         Pozajmica p1 = new Pozajmica("Petar",k1, LocalDate.now(), null);
         Pozajmica p2 = new Pozajmica("Maja",k2, LocalDate.of(2026,4,1), null);
         Pozajmica p3 = new Pozajmica("Luka",k3, LocalDate.of(2026,5,7), null);
-        System.out.println(Pozajmica.getBrPozajmica());
+        System.out.println(Pozajmica.getUkupanBrPozajmica());
 
+        //Biblioteka b1 = new Biblioteka();
         System.out.println(p1);
         System.out.println(p2);
+        System.out.println(k2);
+        System.out.println(listaKnjiga);
     }
 }
