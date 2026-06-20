@@ -30,10 +30,20 @@ public class Biblioteka {
    public int ukupnoPozajmica(){
         return Pozajmica.getUkupanBrPozajmica();
     }
+
     public void izdajKnjigu(Pozajmica p){
-        p.getKnjiga().povecajBrPozajmica();
+        if(!p.getKnjiga().isDostupna()){
+            System.out.println("Žao nam je, ova knjiga je vec izdata.");
+        } else{
+            p.getKnjiga().setDostupna(false);
+            p.setDanIzdavanja(LocalDate.now());
+            getListaPozajmica().add(p);
+            p.getKnjiga().povecajBrPozajmica();
+        }
+
     }
     public void vratiKnjigu(Pozajmica p) {
+        p.getKnjiga().setDostupna(true);
         p.setDanVracanja(LocalDate.now());
     }
     public ArrayList<Knjiga> getListaKnjiga() {
@@ -53,13 +63,20 @@ public class Biblioteka {
     }
 
 
+    public ArrayList<Pozajmica> getListaPozajmica() {
+        return listaPozajmica;
+    }
+
+    public void setListaPozajmica(ArrayList<Pozajmica> listaPozajmica) {
+        this.listaPozajmica = listaPozajmica;
+    }
+
     @Override
     public String toString() {
         return "Biblioteka{" +
                 "listaKnjiga=" + listaKnjiga +
                 '}';
     }
-
     /*public Knjiga najpopulrnija(){
 
     }*/

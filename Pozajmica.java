@@ -14,16 +14,16 @@ import java.time.temporal.ChronoUnit;
 
 public class Pozajmica {
     private static int ukupanBrPozajmica;
-    private String korisnik;
+    private Korisnik korisnik;
     private Knjiga knjiga;
     private LocalDate danIzdavanja;
     private LocalDate danVracanja;
 
-    public Pozajmica(String korisnik, Knjiga knjiga, LocalDate danIzdavanja, LocalDate danVracanja){
+    public Pozajmica(Korisnik korisnik, Knjiga knjiga){
         this.korisnik=korisnik;
         this.knjiga=knjiga;
-        this.danIzdavanja=danIzdavanja;
-        this.danVracanja = danVracanja;
+        this.danIzdavanja=null;
+        this.danVracanja = null;
         ukupanBrPozajmica++;
     }
 
