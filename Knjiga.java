@@ -11,6 +11,7 @@ public class Knjiga {
     private String autor;
     private int brStrana;
     private int brPozajmica;
+    private boolean dostupna;
 
     public Knjiga(String naslov, String autor, int brStrana, int brPozajmica){
         this.naslov=naslov;
@@ -19,6 +20,7 @@ public class Knjiga {
         if(brPozajmica <0){
             throw new IllegalArgumentException("Broj pozajmica ne moze biti negativan!");
         }this.brPozajmica = brPozajmica;
+        this.dostupna=true;
     }
     public boolean popularan(){
         return brPozajmica>500;
@@ -65,6 +67,14 @@ public class Knjiga {
             this.brPozajmica = brPozajmica;
         }
     }
+    public boolean isDostupna() {
+        return dostupna;
+    }
+
+    public void setDostupna(boolean dostupna) {
+        this.dostupna = dostupna;
+    }
+
     @Override
     public String toString() {
         return "Knjiga{" +
@@ -74,4 +84,6 @@ public class Knjiga {
                 ", brPozajmica=" + brPozajmica +
                 '}';
     }
+
+
 }
