@@ -40,11 +40,11 @@ public class Biblioteka {
             getListaPozajmica().add(p);
             p.getKnjiga().povecajBrPozajmica();
         }
-
     }
     public void vratiKnjigu(Pozajmica p) {
-        p.getKnjiga().setDostupna(true);
         p.setDanVracanja(LocalDate.now());
+        p.kolikoDanaKasni();
+        p.getKnjiga().setDostupna(true);
     }
     public ArrayList<Knjiga> getListaKnjiga() {
         return listaKnjiga;

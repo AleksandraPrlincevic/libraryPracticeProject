@@ -73,30 +73,49 @@ review kao za ovaj projekat
 OOP optimizacije
 i QA edge-case korekcije*/
 
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
 
-        Knjiga k1 =new Knjiga("1984", "George Orwel", 248, 0);
-        Knjiga k2 = new Knjiga("Sidarta",  "Herman Hesse", 164, 0);
+        Knjiga k1 = new Knjiga("1984", "George Orwel", 248, 0);
+        Knjiga k2 = new Knjiga("Sidarta", "Herman Hesse", 164, 0);
         Knjiga k3 = new Knjiga("Slikar prolaznog sveta", "Kazuo Ishiguro", 230, 0);
 
-        ArrayList<Knjiga> listaKnjiga= new ArrayList<>();
+        ArrayList<Knjiga> listaKnjiga = new ArrayList<>();
         listaKnjiga.add(k1);
         listaKnjiga.add(k2);
         listaKnjiga.add(k3);
 
-        Pozajmica p1 = new Pozajmica("Petar",k1, LocalDate.now(), null);
-        Pozajmica p2 = new Pozajmica("Maja",k2, LocalDate.of(2026,4,1), null);
-        Pozajmica p3 = new Pozajmica("Luka",k3, LocalDate.of(2026,5,7), null);
+        Korisnik c1 = new Korisnik("Milovic Lucija", 1, LocalDate.of(2004, 10, 22));
+        Korisnik c2 = new Korisnik("Prlincevic Marica", 2, LocalDate.of(1946, 11, 23));
+        ArrayList<Korisnik> listaKorisnika = new ArrayList<>();
+
+        ArrayList<Pozajmica> listaPozajmica = new ArrayList<>();
+
+        Biblioteka b1 = new Biblioteka(listaKnjiga, listaKorisnika, listaPozajmica);
+
+        Pozajmica p1 = new Pozajmica(c1, k1);
+        b1.izdajKnjigu(p1);
+        Pozajmica p2 = new Pozajmica(c2, k2);
+        b1.izdajKnjigu(p2);
+        Pozajmica p3 = new Pozajmica(c1, k3);
+        b1.izdajKnjigu(p3);
+        b1.izdajKnjigu(p1);
         System.out.println(Pozajmica.getUkupanBrPozajmica());
 
-        //Biblioteka b1 = new Biblioteka();
+        System.out.println(k1.getBrPozajmica());
+
+        p1.kolikoDanaKasni();
+        System.out.println(1000);
         System.out.println(p1);
         System.out.println(p2);
         System.out.println(k2);
-        System.out.println(listaKnjiga);
+        System.out.println(k1.isDostupna());
+        b1.vratiKnjigu(p1);
+        System.out.println(k1.isDostupna());
+
     }
 }

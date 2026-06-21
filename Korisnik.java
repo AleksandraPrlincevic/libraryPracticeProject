@@ -7,7 +7,7 @@ public class Korisnik {
     private int clanskiBroj;
     private LocalDate datumRodjenja;;
 
-    public Korisnik(String prezimeIime, int clanskiBroj, LocalDate datumRodjenja, String adresa){
+    public Korisnik(String prezimeIime, int clanskiBroj, LocalDate datumRodjenja){
         this.prezimeIime=prezimeIime;
         this.clanskiBroj=clanskiBroj;
         this.datumRodjenja=datumRodjenja;

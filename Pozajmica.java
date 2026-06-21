@@ -31,13 +31,23 @@ public class Pozajmica {
         return ukupanBrPozajmica;
   }
 
-  public int izracunajBrDana(){
-        long brDana= ChronoUnit.DAYS.between(danIzdavanja, LocalDate.now());
+ public int izracunajBrDana(){
+        LocalDate krajnjiDatum = (danVracanja==null)? LocalDate.now(): danVracanja;
+        long brDana= ChronoUnit.DAYS.between(danIzdavanja, krajnjiDatum);
         return (int)brDana;
   }
    public boolean prekoracenje(){
         return izracunajBrDana()>30;
    }
+
+   public void kolikoDanaKasni() { //metodu koristi samo biblioteka prilikom vracanja knjige!
+           if ( danVracanja != null && !prekoracenje()) {
+               System.out.println("Knjiga je vracena u roku!");
+           } else {
+               int daniZakasnjenja = izracunajBrDana() - 30;
+               System.out.println("Korisnik kasni s vracanjem knjige :" + daniZakasnjenja +"dana,");
+           }
+       }
 
     public Knjiga getKnjiga() {
         return knjiga;
@@ -54,7 +64,6 @@ public class Pozajmica {
     public void setKorisnik(Korisnik korisnik) {
         this.korisnik = korisnik;
     }
-
     public LocalDate getDanIzdavanja() {
         return danIzdavanja;
     }
@@ -73,11 +82,11 @@ public class Pozajmica {
     @Override
     public String toString() {
         return "Pozajmica{" +
-                "korisnik='" + korisnik + '\'' +
-                ", knjiga='" + getKnjiga().getNaslov() + '\'' +
-                ", brDana=" + izracunajBrDana()  +
-                ", danIzdavanja=" + getDanIzdavanja()  +
-                ", danVracanja=" + getDanVracanja()  +
+                 korisnik.getPrezimeIime() + ", clanski br: " + korisnik.getClanskiBroj() +
+                ", knjiga: '" + getKnjiga().getNaslov() + '\'' +
+                ", brDana: " + izracunajBrDana()  +
+                ", danIzdavanja: " + getDanIzdavanja()  +
+                ", danVracanja: " + getDanVracanja()  +
                 '}';
     }
 }
