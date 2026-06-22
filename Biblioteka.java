@@ -31,15 +31,17 @@ public class Biblioteka {
         return Pozajmica.getUkupanBrPozajmica();
     }
 
-    public void izdajKnjigu(Pozajmica p){
-        if(!p.getKnjiga().isDostupna()){
+    public Pozajmica izdajKnjigu(Korisnik korisnik, Knjiga knjiga){
+        if(!knjiga.isDostupna()){
             System.out.println("Žao nam je, ova knjiga je vec izdata.");
-        } else{
-            p.getKnjiga().setDostupna(false);
-            p.setDanIzdavanja(LocalDate.now());
-            getListaPozajmica().add(p);
-            p.getKnjiga().povecajBrPozajmica();
+            return null;
         }
+            Pozajmica p = new Pozajmica(korisnik, knjiga);
+            knjiga.setDostupna(false);
+            p.setDanIzdavanja(LocalDate.now());
+            listaPozajmica.add(p);
+            knjiga.povecajBrPozajmica();
+            return p;
     }
     public void vratiKnjigu(Pozajmica p) {
         p.setDanVracanja(LocalDate.now());

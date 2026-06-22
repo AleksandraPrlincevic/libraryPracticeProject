@@ -18,6 +18,7 @@ public class Pozajmica {
     private Knjiga knjiga;
     private LocalDate danIzdavanja;
     private LocalDate danVracanja;
+    private int brPozajmice;
 
     public Pozajmica(Korisnik korisnik, Knjiga knjiga){
         this.korisnik=korisnik;
@@ -25,6 +26,7 @@ public class Pozajmica {
         this.danIzdavanja=null;
         this.danVracanja = null;
         ukupanBrPozajmica++;
+        brPozajmice=ukupanBrPozajmica;// ili umesto dva reda koda: brPozajmica==++ukupanBrojPozajmica
     }
 
   public static int getUkupanBrPozajmica(){
