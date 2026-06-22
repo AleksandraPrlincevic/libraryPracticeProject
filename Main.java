@@ -89,27 +89,26 @@ public class Main {
         listaKnjiga.add(k2);
         listaKnjiga.add(k3);
 
-        Korisnik c1 = new Korisnik("Milovic Lucija", 1, LocalDate.of(2004, 10, 22));
-        Korisnik c2 = new Korisnik("Prlincevic Marica", 2, LocalDate.of(1946, 11, 23));
+        Korisnik c1 = new Korisnik("Milovic Lucija",  LocalDate.of(2004, 10, 22));
+        Korisnik c2 = new Korisnik("Prlincevic Marica",  LocalDate.of(1946, 11, 23));
         ArrayList<Korisnik> listaKorisnika = new ArrayList<>();
 
         ArrayList<Pozajmica> listaPozajmica = new ArrayList<>();
 
         Biblioteka b1 = new Biblioteka(listaKnjiga, listaKorisnika, listaPozajmica);
 
-        Pozajmica p1 = new Pozajmica(c1, k1);
+       /* Pozajmica p1 = new Pozajmica(c1, k1);
         b1.izdajKnjigu(p1);
         Pozajmica p2 = new Pozajmica(c2, k2);
         b1.izdajKnjigu(p2);
         Pozajmica p3 = new Pozajmica(c1, k3);
         b1.izdajKnjigu(p3);
-        b1.izdajKnjigu(p1);
+        b1.izdajKnjigu(p1);*/
         System.out.println(Pozajmica.getUkupanBrPozajmica());
 
         System.out.println(k1.getBrPozajmica());
 
         p1.kolikoDanaKasni();
-        System.out.println(1000);
         System.out.println(p1);
         System.out.println(p2);
         System.out.println(k2);

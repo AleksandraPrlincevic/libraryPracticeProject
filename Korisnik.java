@@ -4,13 +4,15 @@ import java.time.LocalDate;
 
 public class Korisnik {
     private String prezimeIime;
+    private LocalDate datumRodjenja;
+    private static int pomocniBroj = 100;
     private int clanskiBroj;
-    private LocalDate datumRodjenja;;
 
-    public Korisnik(String prezimeIime, int clanskiBroj, LocalDate datumRodjenja){
+    public Korisnik(String prezimeIime, LocalDate datumRodjenja){
         this.prezimeIime=prezimeIime;
-        this.clanskiBroj=clanskiBroj;
         this.datumRodjenja=datumRodjenja;
+        this.clanskiBroj = pomocniBroj;
+        pomocniBroj++; // ova dva reda koda su se mogla napisati i skraceno: this.clanskiBroj=pomocniBroj++
     }
 
     public String getPrezimeIime() {
@@ -23,10 +25,6 @@ public class Korisnik {
 
     public int getClanskiBroj() {
         return clanskiBroj;
-    }
-
-    public void setClanskiBroj(int clanskiBroj) {
-        this.clanskiBroj = clanskiBroj;
     }
 
     public LocalDate getDatumRodjenja() {
