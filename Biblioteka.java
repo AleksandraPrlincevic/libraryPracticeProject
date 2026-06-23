@@ -17,14 +17,16 @@ public class Biblioteka {
     private ArrayList<Knjiga>listaKnjiga;
     private ArrayList<Korisnik> listaKorisnika;
     private ArrayList<Pozajmica> listaPozajmica;
-    public Biblioteka(ArrayList<Knjiga> listaKnjiga, ArrayList<Korisnik> listaKorisnika, ArrayList<Pozajmica> listaPozajmica){
+    private ArrayList<Pozajmica> arhivaPozajmica;
+    public Biblioteka(ArrayList<Knjiga> listaKnjiga, ArrayList<Korisnik> listaKorisnika){
         if(listaKnjiga== null){
             throw  new NullPointerException("Biblioteka mora posedovati listu knjiga!");
         } this.listaKnjiga=listaKnjiga;
         if(listaKorisnika== null){
             throw  new NullPointerException("Biblioteka mora posedovati listu korisnika!");
-        } this.listaKorisnika=listaKorisnika;
-        this.listaPozajmica=listaPozajmica;
+        }this.listaKorisnika=listaKorisnika;
+        this.listaPozajmica = new ArrayList<>();
+        this.arhivaPozajmica = new ArrayList<>();
     }
 
    public int ukupnoPozajmica(){
@@ -41,12 +43,15 @@ public class Biblioteka {
             p.setDanIzdavanja(LocalDate.now());
             listaPozajmica.add(p);
             knjiga.povecajBrPozajmica();
+            System.out.println(p);
             return p;
     }
     public void vratiKnjigu(Pozajmica p) {
         p.setDanVracanja(LocalDate.now());
         p.kolikoDanaKasni();
         p.getKnjiga().setDostupna(true);
+        listaPozajmica.remove(p);
+        arhivaPozajmica.add(p);
     }
     public ArrayList<Knjiga> getListaKnjiga() {
         return listaKnjiga;
@@ -75,9 +80,7 @@ public class Biblioteka {
 
     @Override
     public String toString() {
-        return "Biblioteka{" +
-                "listaKnjiga=" + listaKnjiga +
-                '}';
+        return "Biblioteka:" + listaKorisnika + listaKnjiga + listaPozajmica;
     }
     /*public Knjiga najpopulrnija(){
 
