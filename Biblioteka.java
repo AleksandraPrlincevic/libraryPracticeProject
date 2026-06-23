@@ -52,12 +52,17 @@ public class Biblioteka {
             System.out.println(p);
             return p;
     }
-    public void vratiKnjigu(Pozajmica p) {
-        p.setDanVracanja(LocalDate.now());
-        p.kolikoDanaKasni();
-        p.getKnjiga().setDostupna(true);
-        listaPozajmica.remove(p);
-        arhivaPozajmica.add(p);
+    public void vratiKnjigu(Korisnik korisnik, Knjiga knjiga) {
+        for (Pozajmica p : listaPozajmica) {
+            if (p.getKorisnik().equals(korisnik) && p.getKnjiga().equals(knjiga)) {
+                p.setDanVracanja(LocalDate.now());
+                p.kolikoDanaKasni();
+                p.getKnjiga().setDostupna(true);
+                listaPozajmica.remove(p);
+                arhivaPozajmica.add(p);
+                break;
+            }
+        }
     }
     public ArrayList<Knjiga> getListaKnjiga() {
         return listaKnjiga;
