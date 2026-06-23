@@ -13,13 +13,11 @@ public class Knjiga {
     private int brPozajmica;
     private boolean dostupna;
 
-    public Knjiga(String naslov, String autor, int brStrana, int brPozajmica){
+    public Knjiga(String naslov, String autor, int brStrana){
         this.naslov=naslov;
         this.autor=autor;
         this.brStrana=brStrana;
-        if(brPozajmica <0){
-            throw new IllegalArgumentException("Broj pozajmica ne moze biti negativan!");
-        }this.brPozajmica = brPozajmica;
+        this.brPozajmica = 0;
         this.dostupna=true;
     }
     public boolean popularan(){
