@@ -9,6 +9,7 @@ najpopularnija knjiga (po tvom kriterijumu)
 uklanjanje knjige
 filtriranje “popularnih”*/
 
+import javax.swing.plaf.PanelUI;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -18,21 +19,26 @@ public class Biblioteka {
     private ArrayList<Korisnik> listaKorisnika;
     private ArrayList<Pozajmica> listaPozajmica;
     private ArrayList<Pozajmica> arhivaPozajmica;
-    public Biblioteka(ArrayList<Knjiga> listaKnjiga, ArrayList<Korisnik> listaKorisnika){
-        if(listaKnjiga== null){
-            throw  new NullPointerException("Biblioteka mora posedovati listu knjiga!");
-        } this.listaKnjiga=listaKnjiga;
-        if(listaKorisnika== null){
-            throw  new NullPointerException("Biblioteka mora posedovati listu korisnika!");
-        }this.listaKorisnika=listaKorisnika;
+    public Biblioteka(){
+        this.listaKnjiga = new ArrayList<>();
+        this.listaKorisnika = new ArrayList<>();
         this.listaPozajmica = new ArrayList<>();
         this.arhivaPozajmica = new ArrayList<>();
     }
-
    public int ukupnoPozajmica(){
         return Pozajmica.getUkupanBrPozajmica();
     }
 
+    public void dodajKnjigu(Knjiga... knjige) {
+        for (Knjiga k : knjige) {
+            listaKnjiga.add(k);
+        }
+    }
+    public void dodajKorisnika(Korisnik... korisnici){
+        for(Korisnik c: korisnici){
+            listaKorisnika.add(c);
+        }
+    }
     public Pozajmica izdajKnjigu(Korisnik korisnik, Knjiga knjiga){
         if(!knjiga.isDostupna()){
             System.out.println("Žao nam je, ova knjiga je vec izdata.");

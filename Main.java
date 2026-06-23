@@ -84,37 +84,23 @@ public class Main {
         Knjiga k2 = new Knjiga("Sidarta", "Herman Hesse", 164, 0);
         Knjiga k3 = new Knjiga("Slikar prolaznog sveta", "Kazuo Ishiguro", 230, 0);
 
-        ArrayList<Knjiga> listaKnjiga = new ArrayList<>();
-        listaKnjiga.add(k1);
-        listaKnjiga.add(k2);
-        listaKnjiga.add(k3);
 
         Korisnik c1 = new Korisnik("Milovic Lucija",  LocalDate.of(2004, 10, 22));
         Korisnik c2 = new Korisnik("Prlincevic Marica",  LocalDate.of(1946, 11, 23));
-        ArrayList<Korisnik> listaKorisnika = new ArrayList<>();
 
-        ArrayList<Pozajmica> listaPozajmica = new ArrayList<>();
 
-        Biblioteka b1 = new Biblioteka(listaKnjiga, listaKorisnika, listaPozajmica);
+        Biblioteka b1 = new Biblioteka();
+        b1.dodajKnjigu(k1, k2, k3);
+        b1.dodajKorisnika(c1, c2);
+        b1.izdajKnjigu(c1, k1);
+        b1.izdajKnjigu(c2,k2);
+        b1.izdajKnjigu(c1,k3);
 
-       /* Pozajmica p1 = new Pozajmica(c1, k1);
-        b1.izdajKnjigu(p1);
-        Pozajmica p2 = new Pozajmica(c2, k2);
-        b1.izdajKnjigu(p2);
-        Pozajmica p3 = new Pozajmica(c1, k3);
-        b1.izdajKnjigu(p3);
-        b1.izdajKnjigu(p1);*/
         System.out.println(Pozajmica.getUkupanBrPozajmica());
 
         System.out.println(k1.getBrPozajmica());
-
-        p1.kolikoDanaKasni();
-        System.out.println(p1);
-        System.out.println(p2);
-        System.out.println(k2);
+        System.out.println();
         System.out.println(k1.isDostupna());
-        b1.vratiKnjigu(p1);
-        System.out.println(k1.isDostupna());
-
+        System.out.println(b1.getListaPozajmica());
     }
 }
