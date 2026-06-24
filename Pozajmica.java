@@ -83,7 +83,8 @@ public class Pozajmica {
 
     @Override
     public String toString() {
-        return "Pozajmica{" +
+        return "Pozajmica{ " +
+                 brPozajmice + " , " +
                  korisnik.getPrezimeIime() + ", clanski br: " + korisnik.getClanskiBroj() +
                 ", knjiga: '" + getKnjiga().getNaslov() + '\'' +
                 ", brDana: " + izracunajBrDana()  +

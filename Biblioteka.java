@@ -107,9 +107,8 @@ public class Biblioteka {
         this.listaPozajmica = listaPozajmica;
     }
 
-    @Override
-    public String toString() {
-        return "Biblioteka:" + listaKorisnika + listaKnjiga + listaPozajmica;
+    public ArrayList<Pozajmica> getArhivaPozajmica() {
+        return arhivaPozajmica;
     }
 
     public ArrayList<Knjiga> najpopularnije() {
@@ -120,7 +119,7 @@ public class Biblioteka {
             najcitanijaK2 = najcitanijaK;
             najcitanijaK = temp;
         }
-        if (Pozajmica.getUkupanBrPozajmica() < 10 || listaKnjiga.size()<2) {
+        if (Pozajmica.getUkupanBrPozajmica() < 4 || listaKnjiga.size()<2) {
             System.out.println("Nema dovoljno knjiga ili pozajmica da bi se znale najpopularnije.");
             return null;
         } else {
@@ -136,5 +135,10 @@ public class Biblioteka {
           najcitanijeKnjige.add(najcitanijaK);
           najcitanijeKnjige.add(najcitanijaK2);
         return najcitanijeKnjige;
+    }
+
+    @Override
+    public String toString() {
+        return "Biblioteka:" + listaKorisnika + listaKnjiga + listaPozajmica;
     }
 }

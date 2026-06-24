@@ -102,6 +102,14 @@ public class Main {
         b1.izdajKnjigu(c1, k1);
         b1.izdajKnjigu(c2,k2);
         b1.izdajKnjigu(c1,k3);
+        b1.izdajKnjigu(c3,k4);
+        b1.izdajKnjigu(c4, k5);
+        b1.vratiKnjigu(c1,k1);
+        b1.izdajKnjigu(c3,k1);
+        b1.vratiKnjigu(c3,k1);
+        b1.izdajKnjigu(c4,k1);
+        b1.vratiKnjigu(c2,k2);
+        b1.izdajKnjigu(c2,k4);
 
         System.out.println(Pozajmica.getUkupanBrPozajmica());
 
@@ -109,5 +117,7 @@ public class Main {
         System.out.println();
         System.out.println(k1.isDostupna());
         System.out.println(b1.getListaPozajmica());
+        System.out.println(b1.najpopularnije());
+        System.out.println(b1.getArhivaPozajmica());
     }
 }

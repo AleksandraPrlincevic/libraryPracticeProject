@@ -13,8 +13,8 @@ ima svoj kriterijum popularnosti (nije isti kao kod knjige)*/
 public class AudioKnjiga extends Knjiga{
 
     private double trajanje;
-    public AudioKnjiga(String naslov, String autor, int brStrana, int brPozajmica, double trajanje){
-        super(naslov, autor, brStrana, brPozajmica);
+    public AudioKnjiga(String naslov, String autor, int brStrana, double trajanje){
+        super(naslov, autor, brStrana);
         if(trajanje <=0){
             throw new IllegalArgumentException("Trajanje mora biti vece od nule!");
         }
