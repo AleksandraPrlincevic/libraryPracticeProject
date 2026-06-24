@@ -7,12 +7,14 @@ public class Korisnik {
     private LocalDate datumRodjenja;
     private static int pomocniBroj = 100;
     private int clanskiBroj;
+    private int brPozajmica;
 
     public Korisnik(String prezimeIime, LocalDate datumRodjenja){
         this.prezimeIime=prezimeIime;
         this.datumRodjenja=datumRodjenja;
         this.clanskiBroj = pomocniBroj;
         pomocniBroj++; // ova dva reda koda su se mogla napisati i skraceno: this.clanskiBroj=pomocniBroj++
+        this.brPozajmica = 0;
     }
 
     public String getPrezimeIime() {
@@ -35,12 +37,19 @@ public class Korisnik {
         this.datumRodjenja = datumRodjenja;
     }
 
+    public int getBrPozajmica() {
+        return brPozajmica;
+    }
+
     @Override
     public String toString() {
         return "Korisnik{" +
                 "prezimeIime='" + prezimeIime + '\'' +
                 ", clanskiBroj=" + clanskiBroj +
                 ", datumRodjenja=" + datumRodjenja +
+                ", brPozajmica=" + brPozajmica +
                 '}';
     }
+
+
 }
