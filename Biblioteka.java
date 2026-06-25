@@ -159,7 +159,7 @@ public class Biblioteka {
        return listaKorisnika.size()>=3;
     }
 
-    public ArrayList<Korisnik> getKorisniciSortiraniPoPrezimenu(ArrayList<Korisnik> listaKorisnika){
+    public ArrayList<Korisnik> getKorisniciSortiraniPoPrezimenu(){
           ArrayList<Korisnik> korisniciSortiraniPoPrezimenu = new ArrayList<>(listaKorisnika);
           if(!isDovoljnoKorisnika()){
               System.out.println("Nema dovoljno korisnika za njihovo sortiranje.");
@@ -179,14 +179,13 @@ public class Biblioteka {
              k2.getDatumRodjenja().compareTo(k1.getDatumRodjenja()));
         } return korisniciSortiraniPoStrostiRastuci;
    }
-   public ArrayList<Korisnik> getTriNajmladjaKorisnika(){
-        return new ArrayList<>(getKorisniciSortiraniPoStrostiRastuci().subList(0, 3));
+   public ArrayList<Korisnik> getNajmladjiKorisnici(int x){
+        return new ArrayList<>(getKorisniciSortiraniPoStrostiRastuci().subList(0, x));
    }
-   public ArrayList<Korisnik> getTriNajstarijaKorisnike(){
-        return new ArrayList<>(getKorisniciSortiraniPoStrostiRastuci().subList(getKorisniciSortiraniPoStrostiRastuci().size()-3,
-                getKorisniciSortiraniPoStrostiRastuci().size()));
+   public  List<Korisnik> getTriNajstarijaKorisnike(int x) {
+       ArrayList<Korisnik> najstarijiKorisnici = new ArrayList<>(getKorisniciSortiraniPoStrostiRastuci());
+       return najstarijiKorisnici.subList(najstarijiKorisnici.size()-x, najstarijiKorisnici.size());
    }
-
     @Override
     public String toString() {
         return "Biblioteka:" + listaKorisnika + listaKnjiga + listaPozajmica;
