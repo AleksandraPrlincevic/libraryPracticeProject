@@ -54,6 +54,7 @@ public class Biblioteka {
         p.setDanIzdavanja(LocalDate.now());
         listaPozajmica.add(p);
         knjiga.povecajBrPozajmica();
+        korisnik.povecajBrPozajmica();
         System.out.println(p);
         return p;
     }
@@ -137,6 +138,17 @@ public class Biblioteka {
         return najcitanijeKnjige;
     }
 
+    public ArrayList<Korisnik> najaktivnijiKorisnici(){
+        if(Pozajmica.getUkupanBrPozajmica()<4 || listaKorisnika.size()<2){
+            System.out.println("Nema dovoljno korisnika ili pozjmica da bi se nasli najaktivniji korisnici");
+            return null;
+        } else {
+            listaKorisnika.sort((k1, k2) ->
+                    Integer.compare(k2.getBrPozajmica(), k1.getBrPozajmica())
+            );
+            return new ArrayList<>(listaKorisnika.subList(0, 2));
+        }
+    }
     @Override
     public String toString() {
         return "Biblioteka:" + listaKorisnika + listaKnjiga + listaPozajmica;

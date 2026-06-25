@@ -24,9 +24,7 @@ public class Knjiga {
         return brPozajmica>500;
     }
 
-    public void povecajBrPozajmica(){ // ovo mora da se resi? kako se povezuje sa pozajmicom i zna kad je
-                                     // izdata -reseno tako sto Pozajmica ima polje Knjiga i time i pristup ovoj metodi,
-                                   // pa kad se pozove pozajmica iz biblioteke onda preko nje moze i knjiga i njene metode i varijable;
+    public void povecajBrPozajmica(){
         brPozajmica++;
     }
 
