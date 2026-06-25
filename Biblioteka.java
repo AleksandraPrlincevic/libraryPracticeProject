@@ -138,17 +138,55 @@ public class Biblioteka {
         return najcitanijeKnjige;
     }
 
-    public ArrayList<Korisnik> najaktivnijiKorisnici(){
-        if(Pozajmica.getUkupanBrPozajmica()<4 || listaKorisnika.size()<2){
+    public ArrayList<Korisnik> getKorisniciSortiraniPoBrPozajmica(){
+        ArrayList<Korisnik> korisniciSortiraniPoBrojuPozajmica = new ArrayList<>(listaKorisnika);
+        if(Pozajmica.getUkupanBrPozajmica()<4 || listaKorisnika.size()<3){
             System.out.println("Nema dovoljno korisnika ili pozjmica da bi se nasli najaktivniji korisnici");
             return null;
         } else {
-            listaKorisnika.sort((k1, k2) ->
+            korisniciSortiraniPoBrojuPozajmica.sort((k1, k2) ->
                     Integer.compare(k2.getBrPozajmica(), k1.getBrPozajmica())
             );
-            return new ArrayList<>(listaKorisnika.subList(0, 2));
+            return korisniciSortiraniPoBrojuPozajmica;
         }
     }
+
+    public ArrayList<Korisnik> getTriNajaktivnijaKorisnika(){
+       return new ArrayList<>(getKorisniciSortiraniPoBrPozajmica().subList(0, 3));
+    }
+
+    public boolean isDovoljnoKorisnika(){
+       return listaKorisnika.size()>=3;
+    }
+
+    public ArrayList<Korisnik> getKorisniciSortiraniPoPrezimenu(ArrayList<Korisnik> listaKorisnika){
+          ArrayList<Korisnik> korisniciSortiraniPoPrezimenu = new ArrayList<>(listaKorisnika);
+          if(!isDovoljnoKorisnika()){
+              System.out.println("Nema dovoljno korisnika za njihovo sortiranje.");
+          } else{
+              korisniciSortiraniPoPrezimenu.sort((k1, k2) ->
+                   k1.getPrezimeIime().compareTo(k2.getPrezimeIime()));
+          }return korisniciSortiraniPoPrezimenu;
+    }
+
+   public ArrayList<Korisnik> getKorisniciSortiraniPoStrostiRastuci(){
+        ArrayList<Korisnik> korisniciSortiraniPoStrostiRastuci= new ArrayList<>(listaKorisnika);
+
+        if(!isDovoljnoKorisnika()){
+            System.out.println("Nema dovoljno korisnika za njihovo sortiranje.");
+        } else{
+            korisniciSortiraniPoStrostiRastuci.sort((k1, k2) ->
+             k2.getDatumRodjenja().compareTo(k1.getDatumRodjenja()));
+        } return korisniciSortiraniPoStrostiRastuci;
+   }
+   public ArrayList<Korisnik> getTriNajmladjaKorisnika(){
+        return new ArrayList<>(getKorisniciSortiraniPoStrostiRastuci().subList(0, 3));
+   }
+   public ArrayList<Korisnik> getTriNajstarijaKorisnike(){
+        return new ArrayList<>(getKorisniciSortiraniPoStrostiRastuci().subList(getKorisniciSortiraniPoStrostiRastuci().size()-3,
+                getKorisniciSortiraniPoStrostiRastuci().size()));
+   }
+
     @Override
     public String toString() {
         return "Biblioteka:" + listaKorisnika + listaKnjiga + listaPozajmica;
