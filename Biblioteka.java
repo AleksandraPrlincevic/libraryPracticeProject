@@ -10,6 +10,7 @@ uklanjanje knjige
 filtriranje “popularnih”*/
 
 import javax.swing.plaf.PanelUI;
+import java.security.spec.RSAOtherPrimeInfo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,80 +113,81 @@ public class Biblioteka {
         return arhivaPozajmica;
     }
 
-    public ArrayList<Knjiga> najpopularnije() {
+    public ArrayList<Knjiga> getNajpopularnijeKnjige() {
+        if (Pozajmica.getUkupanBrPozajmica() < 2 || listaKnjiga.size()<2) {
+        System.out.println("Nema dovoljno knjiga ili pozajmica da bi se znale najpopularnije.");
+        return new ArrayList<>();
+    }
         Knjiga najcitanijaK = listaKnjiga.get(0);
         Knjiga najcitanijaK2 = listaKnjiga.get(1);
-        if(najcitanijaK2.getBrPozajmica()<najcitanijaK.getBrPozajmica()){
+        if(najcitanijaK2.getBrPozajmica()<najcitanijaK.getBrPozajmica()) {
             Knjiga temp = najcitanijaK2;
             najcitanijaK2 = najcitanijaK;
             najcitanijaK = temp;
-        }
-        if (Pozajmica.getUkupanBrPozajmica() < 4 || listaKnjiga.size()<2) {
-            System.out.println("Nema dovoljno knjiga ili pozajmica da bi se znale najpopularnije.");
-            return null;
-        } else {
-            for (int i = 2; i < listaKnjiga.size(); i++) {
+        }  for (int i = 2; i < listaKnjiga.size(); i++) {
                 if (najcitanijaK.getBrPozajmica() <= listaKnjiga.get(i).getBrPozajmica()) {
                     najcitanijaK2=najcitanijaK;
                     najcitanijaK=listaKnjiga.get(i);
                 } else if (najcitanijaK2.getBrPozajmica() <= listaKnjiga.get(i).getBrPozajmica()){
                     najcitanijaK2 = listaKnjiga.get(i);
                 }
-            }
         } ArrayList<Knjiga> najcitanijeKnjige = new ArrayList<>();
           najcitanijeKnjige.add(najcitanijaK);
           najcitanijeKnjige.add(najcitanijaK2);
         return najcitanijeKnjige;
     }
 
-    public ArrayList<Korisnik> getKorisniciSortiraniPoBrPozajmica(){
-        ArrayList<Korisnik> korisniciSortiraniPoBrojuPozajmica = new ArrayList<>(listaKorisnika);
-        if(Pozajmica.getUkupanBrPozajmica()<4 || listaKorisnika.size()<3){
-            System.out.println("Nema dovoljno korisnika ili pozjmica da bi se nasli najaktivniji korisnici");
-            return null;
-        } else {
-            korisniciSortiraniPoBrojuPozajmica.sort((k1, k2) ->
+    public ArrayList<Korisnik> getKorisniciSortiraniPoBrPozajmicaOdMax(){
+           ArrayList<Korisnik> korisniciSortiraniPoBrojuPozajmicaOdMax = new ArrayList<>(listaKorisnika);
+            korisniciSortiraniPoBrojuPozajmicaOdMax.sort((k1, k2) ->
                     Integer.compare(k2.getBrPozajmica(), k1.getBrPozajmica())
             );
-            return korisniciSortiraniPoBrojuPozajmica;
-        }
-    }
-
-    public ArrayList<Korisnik> getTriNajaktivnijaKorisnika(){
-       return new ArrayList<>(getKorisniciSortiraniPoBrPozajmica().subList(0, 3));
-    }
-
-    public boolean isDovoljnoKorisnika(){
-       return listaKorisnika.size()>=3;
+            return korisniciSortiraniPoBrojuPozajmicaOdMax;
     }
 
     public ArrayList<Korisnik> getKorisniciSortiraniPoPrezimenu(){
           ArrayList<Korisnik> korisniciSortiraniPoPrezimenu = new ArrayList<>(listaKorisnika);
-          if(!isDovoljnoKorisnika()){
-              System.out.println("Nema dovoljno korisnika za njihovo sortiranje.");
-          } else{
               korisniciSortiraniPoPrezimenu.sort((k1, k2) ->
                    k1.getPrezimeIime().compareTo(k2.getPrezimeIime()));
-          }return korisniciSortiraniPoPrezimenu;
+          return korisniciSortiraniPoPrezimenu;
     }
 
-   public ArrayList<Korisnik> getKorisniciSortiraniPoStrostiRastuci(){
+   public ArrayList<Korisnik> getKorisniciSortiraniPoStarostiRastuci(){
         ArrayList<Korisnik> korisniciSortiraniPoStrostiRastuci= new ArrayList<>(listaKorisnika);
-
-        if(!isDovoljnoKorisnika()){
-            System.out.println("Nema dovoljno korisnika za njihovo sortiranje.");
-        } else{
             korisniciSortiraniPoStrostiRastuci.sort((k1, k2) ->
              k2.getDatumRodjenja().compareTo(k1.getDatumRodjenja()));
-        } return korisniciSortiraniPoStrostiRastuci;
+          return korisniciSortiraniPoStrostiRastuci;
    }
-   public ArrayList<Korisnik> getNajmladjiKorisnici(int x){
-        return new ArrayList<>(getKorisniciSortiraniPoStrostiRastuci().subList(0, x));
+
+    public boolean isDovoljnoKorisnika(int x){
+        return listaKorisnika.size()>=x;
+    }
+
+    public ArrayList<Korisnik> getNajaktivnijeKorisnike(int x) {
+        if (!isDovoljnoKorisnika(x)) {
+            System.out.println("Ima manje od " + x + "korisnika!");
+            return new ArrayList<>();
+        }
+            return new ArrayList<>(getKorisniciSortiraniPoBrPozajmicaOdMax().subList(0, x));
+    }
+
+   public ArrayList<Korisnik> getNajmladjiKorisnici(int x) {
+       if (!isDovoljnoKorisnika(x)) {
+           System.out.println("Ima manje od " + x + "korisnika!");
+           return new ArrayList<>();
+       }
+           return new ArrayList<>(getKorisniciSortiraniPoStarostiRastuci().subList(0, x));
    }
-   public  List<Korisnik> getTriNajstarijaKorisnike(int x) {
-       ArrayList<Korisnik> najstarijiKorisnici = new ArrayList<>(getKorisniciSortiraniPoStrostiRastuci());
-       return najstarijiKorisnici.subList(najstarijiKorisnici.size()-x, najstarijiKorisnici.size());
+
+   public  List<Korisnik> getNajstarijiKorisnici(int x) {
+       if (!isDovoljnoKorisnika(x)) {
+           System.out.println("Ima manje od " + x + "korisnika!");
+           return new ArrayList<>();
+       }
+           ArrayList<Korisnik> najstarijiKorisnici = getKorisniciSortiraniPoStarostiRastuci();
+           return new ArrayList<>(najstarijiKorisnici.subList(najstarijiKorisnici.size() - x, najstarijiKorisnici.size()));
    }
+
     @Override
     public String toString() {
         return "Biblioteka:" + listaKorisnika + listaKnjiga + listaPozajmica;
