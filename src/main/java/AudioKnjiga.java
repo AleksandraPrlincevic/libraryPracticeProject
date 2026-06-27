@@ -1,14 +1,4 @@
-package biblioteka;
-/*Svaka knjiga ima:
-naslov, autora, broj strana,broj pozajmica
-Ponašanje:
-mora da zna da kaže da li je “popularna”
-mora da može da poveća broj pozajmica
- 2. Audio knjiga
-Isto kao knjiga, ali ima:
-trajanje (u minutima)
-Ponašanje:
-ima svoj kriterijum popularnosti (nije isti kao kod knjige)*/
+
 
 public class AudioKnjiga extends Knjiga{
 

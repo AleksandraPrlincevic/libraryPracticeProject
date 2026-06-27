@@ -1,13 +1,4 @@
-package biblioteka;
-/*3. Pozajmica
-Evidentira:
 
-naziv korisnika
-knjigu koja je pozajmljena
-broj dana trajanja pozajmice
-Ponašanje:
-mora da zna da li je “duga pozajmica” (po tvom kriterijumu)
-*/
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

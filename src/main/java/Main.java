@@ -1,39 +1,8 @@
-package biblioteka;
+
 /*MINI PROJEKAT: Library Tracker (knjige + pozajmice)
 Zamisli mali sistem za evidenciju knjiga i njihovog korišćenja u biblioteci.
 Osnovni koncept:
 Sistem prati:
-
-knjige
-audio knjige
-evidenciju pozajmica
-i kratke statistike korišćenja
-🔹 1. Knjiga
-Svaka knjiga ima:
-
-naslov
-autora
-broj strana
-broj pozajmica
-Ponašanje:
-mora da zna da kaže da li je “popularna”
-mora da može da poveća broj pozajmica
-🔹 2. Audio knjiga
-
-Isto kao knjiga, ali ima:
-
-trajanje (u minutima)
-Ponašanje:
-ima svoj kriterijum popularnosti (nije isti kao kod knjige)
-🔹 3. Pozajmica
-
-Evidentira:
-
-naziv korisnika
-knjigu koja je pozajmljena
-broj dana trajanja pozajmice
-Ponašanje:
-mora da zna da li je “duga pozajmica” (po tvom kriterijumu)
 
 🔹 4. Biblioteka
 Sadrži:
@@ -45,12 +14,6 @@ najpopularnija knjiga (po tvom kriterijumu)
 uklanjanje knjige
 filtriranje “popularnih”
 
-🔹 5. Posebno ponašanje (ti odlučuješ)
-U nekom delu sistema moraš da odlučiš:
-
-kako definišeš “popularno”
-kako meriš “dugo”
-šta znači “najviše korišćeno”
 🔹 BONUS (QA mindset)
 
 Testiraj:
@@ -117,7 +80,7 @@ public class Main {
         System.out.println();
         System.out.println(k1.isDostupna());
         System.out.println(b1.getListaPozajmica());
-        System.out.println(b1.najpopularnije());
+        System.out.println(b1.getNajpopularnijeKnjige());
         System.out.println(b1.getArhivaPozajmica());
     }
 }

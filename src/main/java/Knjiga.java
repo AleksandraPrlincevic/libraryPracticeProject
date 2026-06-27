@@ -1,4 +1,4 @@
-package biblioteka;
+
 /*1. Knjiga
 Svaka knjiga ima:
 naslov, autora, broj strana, broj pozajmica
