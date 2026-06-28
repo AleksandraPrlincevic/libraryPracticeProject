@@ -1,4 +1,4 @@
-
+package biblioteka;
 /*4. Biblioteka
 Sadrži:
 
@@ -46,9 +46,12 @@ public class Biblioteka {
     }
 
     public Pozajmica izdajKnjigu(Korisnik korisnik, Knjiga knjiga) {
-        if (!knjiga.isDostupna()) {
-            System.out.println("Žao nam je, ova knjiga je vec izdata.");
-            return null;
+        if(!listaKnjiga.contains(knjiga) || !listaKorisnika.contains(korisnik)){
+            throw new IllegalStateException("Ne moze se napraviti pozajmica. Knjiga ne postoji u biblioteci ili korisnik nije uclanjen");
+        }
+        else if (!knjiga.isDostupna()) {
+            throw new IllegalStateException("Žao nam je, ova knjiga je vec izdata.");
+
         }
         Pozajmica p = new Pozajmica(korisnik, knjiga);
         knjiga.setDostupna(false);
@@ -192,4 +195,5 @@ public class Biblioteka {
     public String toString() {
         return "Biblioteka:" + listaKorisnika + listaKnjiga + listaPozajmica;
     }
+
 }
