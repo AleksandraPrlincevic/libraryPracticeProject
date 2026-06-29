@@ -46,7 +46,7 @@ public class TestDataGenerator {
         return (int)(Math.random()*980 + 20);
      }
 
-     private static Knjiga napraviRandomKnjigu(){
+     public static Knjiga napraviRandomKnjigu(){
         return new Knjiga(getRandomNaslov(), getRandomAutor(), getRandomBrStrana());
      }
 
