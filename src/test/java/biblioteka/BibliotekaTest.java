@@ -12,6 +12,20 @@ class BibliotekaTest {
 
     private Biblioteka biblioteka;
 
+    //helper metode:
+    private Knjiga napraviKnjiguTijeloNjenogTijela(){
+        return new Knjiga("Tijelo njenog tijela", "Slavenka Drakulic", 182);
+    }
+    private Knjiga napraviKnjiguMojaGenijalnaPrijateljica(){
+        return new Knjiga("Moja genijalna prijateljica", "Elena Ferante", 326);
+    }
+    private Knjiga napraviKnjiguKatedrala(){
+        return new Knjiga("Katedrala", "Ivo Bresan", 278);
+    }
+    private Korisnik napraviKorisnikaMaricaPrlincevic(){
+        return new Korisnik("Marica Prlincevic", LocalDate.of(1946,11,23));
+    }
+
     @BeforeEach
     void  setUp(){
         biblioteka = new Biblioteka();
@@ -19,7 +33,7 @@ class BibliotekaTest {
 
     @Test
     public void dodajKnjiguDodajeJednuKnjiguUBibliotku() {
-        Knjiga knjiga = new Knjiga("Tijelo njenog tijela", "Slavenka Drakulic", 182);
+        Knjiga knjiga = napraviKnjiguTijeloNjenogTijela();
 
         biblioteka.dodajKnjigu(knjiga);
 
@@ -30,9 +44,9 @@ class BibliotekaTest {
 
     @Test
     public void dodajKnjiguDodajeTriKnjigeUBibliotku() {
-        Knjiga knjiga1 = new Knjiga("Tijelo njenog tijela", "Slavenka Drakulic", 182);
-        Knjiga knjiga2 = new Knjiga("Moja genijalna prijateljica", "Elena Ferante", 326);
-        Knjiga knjiga3 = new Knjiga("Katedrala", "Ivo Bresan", 278);
+        Knjiga knjiga1 = napraviKnjiguTijeloNjenogTijela();
+        Knjiga knjiga2 = napraviKnjiguMojaGenijalnaPrijateljica();
+        Knjiga knjiga3 = napraviKnjiguKatedrala();
 
         biblioteka.dodajKnjigu(knjiga1, knjiga2, knjiga3);
 
@@ -51,7 +65,7 @@ class BibliotekaTest {
     @Test
     public void izdajJednuKnjiguIzdajeKnjigu() {
         Knjiga knjiga1 = new Knjiga("Tijelo njenog tijela", "Slavenka Drakulic", 182);
-        Korisnik korisnik = new Korisnik("Marica Prlincevic", LocalDate.of(1946,11,23));
+        Korisnik korisnik = napraviKorisnikaMaricaPrlincevic();
 
         biblioteka.dodajKnjigu(knjiga1);
         biblioteka.dodajKorisnika(korisnik);
@@ -64,8 +78,8 @@ class BibliotekaTest {
 
     @Test
     public void izdajKnjiguKojaNePostojiUBiblioteciNeMozeDaJeIzda() {
-        Knjiga knjiga1 = new Knjiga("Tijelo njenog tijela", "Slavenka Drakulic", 182);
-        Korisnik korisnik = new Korisnik("Marica Prlincevic", LocalDate.of(1946,11,23));
+        Knjiga knjiga1 = napraviKnjiguTijeloNjenogTijela();
+        Korisnik korisnik = napraviKorisnikaMaricaPrlincevic();
         biblioteka.dodajKorisnika();
         assertThrows(IllegalStateException.class, ()-> { biblioteka.izdajKnjigu(korisnik, knjiga1);
         });
