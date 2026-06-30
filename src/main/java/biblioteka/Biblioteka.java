@@ -69,11 +69,11 @@ public class Biblioteka {
                 p.setDanVracanja(LocalDate.now());
                 p.kolikoDanaKasni();
                 p.getKnjiga().setDostupna(true);
-                listaPozajmica.remove(p);
+                listaPozajmica.remove(p);  //potencijalno problematicno u for each petlji
                 arhivaPozajmica.add(p);
-                break;
+                return;
             }
-        }
+        } throw new  IllegalStateException("Ova pozajmica ne postoji. Ovaj korisnik nije uzeo ovu knjigu!");
     }
 
     public ArrayList<Pozajmica> prikaziKasnjenja() {

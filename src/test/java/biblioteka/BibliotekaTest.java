@@ -4,6 +4,7 @@ import com.sun.source.tree.AssertTree;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -70,5 +71,53 @@ class BibliotekaTest {
         });
 
         assertTrue(biblioteka.getListaPozajmica().isEmpty());
+    }
+
+    @Test
+    public void izdajKnjiguNeupisanomKorisnikuNeMozeDaJeIzda(){
+        Knjiga knjiga1 = TestDataGenerator.napraviRandomKnjigu();
+        Korisnik korisnik = TestDataGenerator.napraviRandomKorisnika();
+        biblioteka.dodajKnjigu(knjiga1);
+        assertThrows(IllegalStateException.class, ()-> {biblioteka.izdajKnjigu(korisnik, knjiga1);
+        });
+    }
+
+    @Test
+    public void vecIzdataKnjigaNeMozeOpetDaSeIzda() {  //odlucili smo da nemamo duplikate
+        Knjiga knjiga = TestDataGenerator.napraviRandomKnjigu();
+        Korisnik korisnik = TestDataGenerator.napraviRandomKorisnika();
+        biblioteka.dodajKnjigu(knjiga);
+        biblioteka.dodajKorisnika(korisnik);
+        biblioteka.izdajKnjigu(korisnik, knjiga);
+        IllegalStateException exception = assertThrows(IllegalStateException.class, ()-> {
+            biblioteka.izdajKnjigu(korisnik, knjiga);
+        });
+        assertEquals("Žao nam je, ova knjiga je vec izdata.", exception.getMessage());
+    }
+
+    @Test
+    public  void izdataKnjigaMozeDaSeVrati(){
+        Knjiga knjiga = TestDataGenerator.napraviRandomKnjigu();
+        Korisnik korisnik = TestDataGenerator.napraviRandomKorisnika();
+        biblioteka.dodajKnjigu(knjiga);
+        biblioteka.dodajKorisnika(korisnik);
+        Pozajmica p1 = biblioteka.izdajKnjigu(korisnik, knjiga);
+        biblioteka.vratiKnjigu(korisnik,knjiga);
+         assertTrue(knjiga.isDostupna());
+         assertTrue(biblioteka.getArhivaPozajmica().contains(p1));
+         assertFalse(biblioteka.getListaPozajmica().contains(p1));
+    }
+
+    @Test
+    public void pozajmicaKojaNePostojiNeMozeDaSeVrati(){
+        Knjiga knjiga = TestDataGenerator.napraviRandomKnjigu();
+        Korisnik korisnik = TestDataGenerator.napraviRandomKorisnika();
+        biblioteka.dodajKnjigu(knjiga);
+        biblioteka.dodajKorisnika(korisnik);
+
+        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
+            biblioteka.vratiKnjigu(korisnik, knjiga);
+        });
+       assertEquals("Ova pozajmica ne postoji. Ovaj korisnik nije uzeo ovu knjigu!", exception.getMessage());
     }
 }
