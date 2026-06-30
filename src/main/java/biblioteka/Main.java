@@ -82,5 +82,7 @@ public class Main {
         System.out.println(b1.getListaPozajmica());
         System.out.println(b1.getNajpopularnijeKnjige());
         System.out.println(b1.getArhivaPozajmica());
+
+
     }
 }

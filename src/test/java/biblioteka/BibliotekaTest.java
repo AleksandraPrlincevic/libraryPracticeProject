@@ -4,8 +4,10 @@ import com.sun.source.tree.AssertTree;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.plaf.PanelUI;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -120,4 +122,25 @@ class BibliotekaTest {
         });
        assertEquals("Ova pozajmica ne postoji. Ovaj korisnik nije uzeo ovu knjigu!", exception.getMessage());
     }
+
+    @Test
+    public void korisniciSeMoguSortiratiPoPrezimenu(){
+        Korisnik k1 = new Korisnik("Milovic Lucija",  LocalDate.of(2004, 10, 22));
+        Korisnik k2 = new Korisnik("Zivkovic Maja",  LocalDate.of(1971, 8, 20));
+        Korisnik k3 = new Korisnik("Bilan Ivica",  LocalDate.of(1966, 2, 7));
+        biblioteka.dodajKorisnika(k1, k2, k3);
+        ArrayList<Korisnik> sortiranaLista = biblioteka.getKorisniciSortiraniPoPrezimenu();
+        assertEquals(k3.getPrezimeIime(), sortiranaLista.get(0).getPrezimeIime());
+        assertEquals(k1.getPrezimeIime(), sortiranaLista.get(1).getPrezimeIime());
+}
+
+     @Test
+     public  void  getNajmladjiKorisnikVracaNajmladje(){
+         Korisnik k1 = new Korisnik("Milovic Lucija",  LocalDate.of(2004, 10, 22));
+         Korisnik k2 = new Korisnik("Zivkovic Maja",  LocalDate.of(1971, 8, 20));
+         Korisnik k3 = new Korisnik("Bilan Ivica",  LocalDate.of(1966, 2, 7));
+         biblioteka.dodajKorisnika(k2, k1, k3);
+         Korisnik najmladji = biblioteka.getNajmladjiKorisnici(1).get(0);
+         assertEquals(k1.getPrezimeIime(), najmladji.getPrezimeIime());
+     }
 }
