@@ -1,44 +1,5 @@
 package biblioteka;
-/*MINI PROJEKAT: Library Tracker (knjige + pozajmice)
-Zamisli mali sistem za evidenciju knjiga i njihovog korišćenja u biblioteci.
-Osnovni koncept:
-Sistem prati:
-
-🔹 4. Biblioteka
-Sadrži:
-
-kolekciju knjiga i audio knjiga
-Ponašanje:
-ukupno pozajmica svih knjiga
-najpopularnija knjiga (po tvom kriterijumu)
-uklanjanje knjige
-filtriranje “popularnih”
-
-🔹 BONUS (QA mindset)
-
-Testiraj:
-
-šta ako knjiga nema nijednu pozajmicu
-šta ako audio knjiga ima 0 minuta (ili nelogičan unos)
-šta ako ukloniš knjigu koja ne postoji
-šta ako ima duplikata knjiga
-šta ako lista/biblioteka bude prazna
-⚠️ Važno
-
-Neću ti reći:
-koje klase da praviš
-kako da ih povežeš
-koje metode gde idu
-To je tvoj deo.
-
-Kad završiš, pošalji kao i do sada — i onda ću ti dati:
-review kao za ovaj projekat
-OOP optimizacije
-i QA edge-case korekcije*/
-
-import java.sql.SQLOutput;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {

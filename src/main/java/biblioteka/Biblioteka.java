@@ -1,16 +1,5 @@
 package biblioteka;
-/*4. Biblioteka
-Sadrži:
 
-kolekciju knjiga i audio knjiga
-Ponašanje:
-ukupno pozajmica svih knjiga
-najpopularnija knjiga (po tvom kriterijumu)
-uklanjanje knjige
-filtriranje “popularnih”*/
-
-import javax.swing.plaf.PanelUI;
-import java.security.spec.RSAOtherPrimeInfo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

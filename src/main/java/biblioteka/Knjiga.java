@@ -1,10 +1,4 @@
 package biblioteka;
-/*1. Knjiga
-Svaka knjiga ima:
-naslov, autora, broj strana, broj pozajmica
-Ponašanje:
-mora da zna da kaže da li je “popularna”
-mora da može da poveća broj pozajmica*/
 
 public class Knjiga {
     private String naslov;
