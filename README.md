@@ -16,11 +16,55 @@ and gain a better understanding of test-driven development principles.
     - JUnit 5
     - Git & GitHub
 
-How to run:
+## Features
 
-1. Open the project in IntelliJ IDEA 
-2. Navigate to `src/test/java/biblioteka/BibliotekaTest.java`
-3. Run tests using JUnit from the IDE
+- Add books to the library
+- Register users
+- Borrow and return books
+- Track active and archived loans
+- Validate business rules using exceptions
+- Retrieve youngest user
+- Sort users by surname
+- 
+## How to run
+
+1. Open the project in IntelliJ IDEA
+2. Load Maven dependencies (IntelliJ will handle this automatically)
+3. Navigate to `src/test/java/biblioteka/BibliotekaTest.java`
+4. Run tests using JUnit from the IDE
+
+OR via terminal if Maven is installed:
+
+```bash
+mvn test
+```
+# Testing
+
+## This project includes:
+
+- Unit tests for core business logic
+- Positive test scenarios
+- Negative test scenarios
+- Exception handling tests
+- Sorting and data validation tests
+- Regression testing after refactoring
+- 
+## What I learned
+
+- Writing unit tests with JUnit 5
+- Structuring test data using helper methods
+- Refactoring code based on test feedback
+- Handling exceptions in business logic
+- Using Git for version control and project history
+- Understanding regression testing in practice
+
+## Future Improvements
+
+- Integration with SQL database instead of in-memory storage 
+- Better handling of date/time logic for testing consistency
+- Implementation of equals() and hashCode()
+- Expansion of business rules and validation
+- Introduction of API layer for external access
 
 
 
