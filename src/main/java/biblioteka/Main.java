@@ -1,8 +1,11 @@
 package biblioteka;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import biblioteka.repository.KnjigaRepository;
+import biblioteka.database.DatabaseConnection;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         Knjiga k1 = new Knjiga("1984", "George Orwel", 248);
         Knjiga k2 = new Knjiga("Sidarta", "Herman Hesse", 164);
@@ -20,7 +23,7 @@ public class Main {
 
 
 
-        Biblioteka b1 = new Biblioteka();
+       /* Biblioteka b1 = new Biblioteka();
         b1.dodajKnjigu(k1, k2, k3, k4, k5, k6);
         b1.dodajKorisnika(c1, c2, c3, c4);
         b1.izdajKnjigu(c1, k1);
@@ -42,8 +45,12 @@ public class Main {
         System.out.println(k1.isDostupna());
         System.out.println(b1.getListaPozajmica());
         System.out.println(b1.getNajpopularnijeKnjige());
-        System.out.println(b1.getArhivaPozajmica());
+        System.out.println(b1.getArhivaPozajmica()); */
 
+        KnjigaRepository kRepo = new KnjigaRepository();
+        kRepo.dodajKnjigu(k1);
+        kRepo.dodajKnjige(k3, k6);
+        System.out.println();
 
     }
 }
