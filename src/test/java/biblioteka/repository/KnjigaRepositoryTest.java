@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,6 +22,17 @@ public class KnjigaRepositoryTest {
         assertTrue(addedBookId>0);
     }
 
+    @Test
+    void canAddMultipleBooksToDatabase() throws Exception {
+        Knjiga[] knjige = {new Knjiga("TESTbook1", "autor1", 123),
+                 new Knjiga("TESTbook2", "autor2", 124),
+                 new Knjiga("TESTbook3", "autor3", 125)};
+        List<Integer> addedBooksIds = repo.dodajKnjige(knjige);
+        assertEquals(knjige.length, addedBooksIds.size());
+        for(int id: addedBooksIds) {
+                    assertTrue(id>0);
+        }
+    }
     @AfterEach
     void cleanUp() throws Exception {
         String sql ="DELETE FROM knjiga WHERE naslov LIKE ?";
