@@ -2,15 +2,14 @@ package biblioteka.repository;
 import biblioteka.Knjiga;
 import biblioteka.database.DatabaseConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class KnjigaRepository {
 
     public int dodajKnjigu(Knjiga k) throws SQLException {
-        String sql = "INSERT INTO knjiga (naslov, autor, br_strana) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO knjiga (naslov, autor, br_strana) VALUES (?, ?, ?) RETURNING id";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);) {
 
@@ -18,14 +17,17 @@ public class KnjigaRepository {
             statement.setString(2,k.getAutor());
             statement.setInt(3,k.getBrStrana());
 
-            return statement.executeUpdate();
+            try (ResultSet rs = statement.executeQuery()){
+                rs.next();
+                return rs.getInt("id");
+            }
         }
     }
-     public int dodajKnjige(Knjiga...knjige) throws SQLException {
-        int dodato = 0;
+     public List<Integer> dodajKnjige(Knjiga...knjige) throws SQLException {
+         List<Integer> ids = new ArrayList<>();
          for (Knjiga k : knjige) {
-             dodato += dodajKnjigu(k);
+             ids.add(dodajKnjigu(k));
          }
-         return dodato;
+         return ids;
      }
 }
