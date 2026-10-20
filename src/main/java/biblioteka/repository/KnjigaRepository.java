@@ -33,7 +33,7 @@ public class KnjigaRepository {
      }
 
      public Knjiga pronadjiKnjiguPoIdu(int knjigaId) throws  SQLException {
-        String sql = "SELECT * FROM knjiga WHERE id = ?";
+        String sql = "SELECT naslov, autor, br_strana FROM knjiga WHERE id = ?";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
@@ -48,5 +48,25 @@ public class KnjigaRepository {
                 } return null;
             }
         }
+     }
+
+     public List<Knjiga> pronadjiKnjigePoIdu(List<Integer> ids) throws SQLException {
+        String sql = "SELECT naslov, autor, br_strana FROM knjiga WHERE id = ANY(?) ORDER BY id";
+        List<Knjiga> knjige = new ArrayList<>();
+        try (Connection connection =DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+             Array niz = connection.createArrayOf("integer", ids.toArray());
+             statement.setArray(1, niz);
+
+             try (ResultSet rs = statement.executeQuery()) {
+                 while(rs.next()) {
+                     knjige.add(new Knjiga(
+                             rs.getString("naslov"),
+                             rs.getString("autor"),
+                             rs.getInt("br_strana")
+                             )
+                     );}
+             }
+        }return knjige;
      }
 }
