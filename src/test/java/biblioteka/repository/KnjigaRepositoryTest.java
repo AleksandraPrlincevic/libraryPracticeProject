@@ -9,8 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class KnjigaRepositoryTest {
     private final KnjigaRepository repo = new KnjigaRepository();
@@ -20,6 +19,11 @@ public class KnjigaRepositoryTest {
         Knjiga k = new Knjiga("TESTbook1", "autor1", 123);
         int addedBookId = repo.dodajKnjigu(k);
         assertTrue(addedBookId>0);
+        Knjiga addedBook = repo.pronadjiKnjiguPoIdu(addedBookId);
+        assertNotNull(addedBook, "Knjiga sa id-em : " + addedBookId + " nije pronadjena u bazi.");
+        assertEquals(k.getNaslov(), addedBook.getNaslov());
+        assertEquals(k.getAutor(), addedBook.getAutor());
+        assertEquals(k.getBrStrana(), addedBook.getBrStrana());
     }
 
     @Test

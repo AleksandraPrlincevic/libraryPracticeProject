@@ -2,6 +2,7 @@ package biblioteka.repository;
 import biblioteka.Knjiga;
 import biblioteka.database.DatabaseConnection;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,5 +30,23 @@ public class KnjigaRepository {
              ids.add(dodajKnjigu(k));
          }
          return ids;
+     }
+
+     public Knjiga pronadjiKnjiguPoIdu(int knjigaId) throws  SQLException {
+        String sql = "SELECT * FROM knjiga WHERE id = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, knjigaId);
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    return new Knjiga(
+                            rs.getString("naslov"),
+                            rs.getString("autor"),
+                            rs.getInt("br_strana")
+                    );
+                } return null;
+            }
+        }
      }
 }
