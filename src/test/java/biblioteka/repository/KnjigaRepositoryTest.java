@@ -2,6 +2,8 @@ package biblioteka.repository;
 
 import biblioteka.Knjiga;
 import biblioteka.database.DatabaseConnection;
+import biblioteka.TestDataGenerator;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +47,35 @@ public class KnjigaRepositoryTest {
             assertEquals(knjige[i].getBrStrana(), ubaceneKnjige.get(i).getBrStrana());
         }
     }
+    @Test
+    void canFindBookById() throws Exception {
+        Knjiga k = TestDataGenerator.napraviRandomKnjigu();
+        int addedBookId = repo.dodajKnjigu(k);
+        assertTrue(addedBookId > 0);
 
+        Knjiga receivedBook = repo.pronadjiKnjiguPoIdu(addedBookId);
+        assertNotNull(receivedBook, "Knjiga sa id=em " + addedBookId + " nije pronadjena u bazi");
+        assertEquals(k.getNaslov(), receivedBook.getNaslov());
+        assertEquals(k.getAutor(), receivedBook.getAutor());
+        assertEquals(k.getBrStrana(), receivedBook.getBrStrana());
+    }
+    @Test
+    void canFindMultipleBooksById() throws Exception {
+        Knjiga[] knjige = TestDataGenerator.napraviRandomKnjige(4);
+        for (int x = 0; x < knjige.length; x++) {
+            assertNotNull(knjige[x], "Knjiga na poziciji " + x + " je null");
+            List<Integer> ids = repo.dodajKnjige(knjige);
+
+            List<Knjiga> receivedBooks = repo.pronadjiKnjigePoIdu(ids);
+            assertEquals(knjige.length, receivedBooks.size());
+            for (int i = 0; i < knjige.length; i++) {
+                assertEquals(knjige[i].getNaslov(), receivedBooks.get(i).getNaslov());
+                assertEquals(knjige[i].getAutor(), receivedBooks.get(i).getAutor());
+                assertEquals(knjige[i].getBrStrana(), receivedBooks.get(i).getBrStrana());
+            }
+
+        }
+    }
     @AfterEach
     void cleanUp() throws Exception {
         String sql ="DELETE FROM knjiga WHERE naslov LIKE ?";
