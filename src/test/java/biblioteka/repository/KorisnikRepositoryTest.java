@@ -22,16 +22,12 @@ public class KorisnikRepositoryTest {
 
         Korisnik receivedKorisnik = repo.pronadjiKorisnikaPoIdu(addedUserId);
         assertNotNull(receivedKorisnik, "Koristik sa id-em " + addedUserId + " nije pronadjen u bazi.");
-        System.out.println(korisnik);
-        System.out.println(receivedKorisnik);
-        System.out.println("ID dodatog korisnika: " + addedUserId);
-        System.out.println("Pronađeni korisnik: " + receivedKorisnik);
         assertEquals(korisnik.getPrezimeIime(), receivedKorisnik.getPrezimeIime());
         assertEquals(korisnik.getDatumRodjenja(), receivedKorisnik.getDatumRodjenja());
         assertTrue(receivedKorisnik.getClanskiBroj()>0);
     }
 
-   /* @AfterEach
+    @AfterEach
     void cleanUp() throws Exception {
         String sql = "DELETE FROM korisnik WHERE prezime_i_ime LIKE ?";
         try(Connection connection = DatabaseConnection.getConnection();
@@ -39,5 +35,5 @@ public class KorisnikRepositoryTest {
             statement.setString(1, "TEST%");
             statement.executeUpdate();
         }
-    } */
+    }
 }
