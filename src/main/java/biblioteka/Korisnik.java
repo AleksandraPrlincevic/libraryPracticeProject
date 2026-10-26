@@ -40,9 +40,10 @@ public class Korisnik {
     public int getBrPozajmica() {
         return brPozajmica;
     }
-   public void povecajBrPozajmica(){
+    public void povecajBrPozajmica(){
         brPozajmica ++;
    }
+
     @Override
     public String toString() {
         return "Korisnik{" +

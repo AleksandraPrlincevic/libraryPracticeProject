@@ -3,7 +3,6 @@ package biblioteka.repository;
 import biblioteka.Knjiga;
 import biblioteka.database.DatabaseConnection;
 import biblioteka.TestDataGenerator;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
