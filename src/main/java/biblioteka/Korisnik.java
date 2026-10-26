@@ -5,16 +5,18 @@ import java.time.LocalDate;
 public class Korisnik {
     private String prezimeIime;
     private LocalDate datumRodjenja;
-    private static int pomocniBroj = 100;
     private int clanskiBroj;
     private int brPozajmica;
 
     public Korisnik(String prezimeIime, LocalDate datumRodjenja){
         this.prezimeIime=prezimeIime;
         this.datumRodjenja=datumRodjenja;
-        this.clanskiBroj = pomocniBroj;
-        pomocniBroj++; // ova dva reda koda su se mogla napisati i skraceno: this.clanskiBroj=pomocniBroj++
         this.brPozajmica = 0;
+    }
+    public Korisnik(String prezimeIime, LocalDate datumRodjenja, int clanskiBroj) {
+        this.prezimeIime = prezimeIime;
+        this.datumRodjenja = datumRodjenja;
+        this.clanskiBroj = clanskiBroj;
     }
 
     public String getPrezimeIime() {
@@ -27,6 +29,9 @@ public class Korisnik {
 
     public int getClanskiBroj() {
         return clanskiBroj;
+    }
+    public void setClanskiBroj(int clanskiBroj) {
+        this.clanskiBroj = clanskiBroj;
     }
 
     public LocalDate getDatumRodjenja() {
