@@ -10,6 +10,8 @@ public class Pozajmica {
     private LocalDate danIzdavanja;
     private LocalDate danVracanja;
     private int brPozajmice;
+    private int korisnikId;
+    private int knjigaId;
 
     public Pozajmica(Korisnik korisnik, Knjiga knjiga){
         this.korisnik=korisnik;
@@ -18,6 +20,12 @@ public class Pozajmica {
         this.danVracanja = null;
         ukupanBrPozajmica++;
         brPozajmice=ukupanBrPozajmica;// ili umesto dva reda koda: brPozajmica==++ukupanBrojPozajmica
+    }
+    public Pozajmica(int korisnikId, int knjigaId, LocalDate danIzdavanja, LocalDate danVracanja){
+        this.korisnikId=korisnikId;
+        this.knjigaId=knjigaId;
+        this.danIzdavanja=danIzdavanja;
+        this.danVracanja = danVracanja;
     }
 
   public static int getUkupanBrPozajmica(){
@@ -49,7 +57,8 @@ public class Pozajmica {
     public void setKnjiga(Knjiga knjiga) {
         this.knjiga = knjiga;
     }
-
+    public int getKnjigaId() {return knjigaId;}
+    public  void setKnjigaId(int knjigaId){this.knjigaId = knjigaId;}
     public Korisnik getKorisnik() {
         return korisnik;
     }
@@ -57,6 +66,8 @@ public class Pozajmica {
     public void setKorisnik(Korisnik korisnik) {
         this.korisnik = korisnik;
     }
+    public int getKorisnikId() {return korisnikId;}
+    public  void setKorisnikId(int korisnikId){this.korisnikId = korisnikId;}
     public LocalDate getDanIzdavanja() {
         return danIzdavanja;
     }
