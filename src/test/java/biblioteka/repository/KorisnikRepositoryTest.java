@@ -29,11 +29,6 @@ public class KorisnikRepositoryTest {
 
     @AfterEach
     void cleanUp() throws Exception {
-        String sql = "DELETE FROM korisnik WHERE prezime_i_ime LIKE ?";
-        try(Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, "TEST%");
-            statement.executeUpdate();
-        }
+        repo.izbrisiKorisnikaPoPrezimenuIimenu("TEST%");
     }
 }

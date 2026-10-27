@@ -69,4 +69,14 @@ public class KnjigaRepository {
              }
         }return knjige;
      }
+
+    public boolean izbrisiKnjiguPoNaslovu(String x) throws Exception {
+        String sql = "DELETE FROM knjiga WHERE naslov LIKE ?";
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)){
+            ps.setString(1, x);
+            int rowsDeleted = ps.executeUpdate();
+            return rowsDeleted >0;
+        }
+    }
 }

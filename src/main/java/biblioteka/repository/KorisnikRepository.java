@@ -41,4 +41,13 @@ public class KorisnikRepository {
             }
         }
     }
+    public boolean izbrisiKorisnikaPoPrezimenuIimenu(String x) throws Exception {
+        String sql = "DELETE FROM korisnik WHERE prezime_i_ime LIKE ?";
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)){
+            ps.setString(1, x);
+            int rowsDeleted = ps.executeUpdate();
+            return rowsDeleted >0;
+        }
+    }
 }

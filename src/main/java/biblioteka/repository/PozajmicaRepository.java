@@ -44,4 +44,13 @@ public class PozajmicaRepository {
             }
         }
     }
+    public boolean izbrisiPozajmicuPoIdu(int pozajmicaId) throws SQLException {
+        String sql = "DELETE FROM pozajmica WHERE id = ?";
+        try(Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)){
+             ps.setInt(1, pozajmicaId);
+             int rowsDeleted = ps.executeUpdate();
+             return rowsDeleted ==1;
+        }
+    }
 }

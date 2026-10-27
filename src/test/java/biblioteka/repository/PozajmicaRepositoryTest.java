@@ -6,8 +6,11 @@ import biblioteka.database.DatabaseConnection;
 import biblioteka.TestDataGenerator;
 import biblioteka.Knjiga;
 import biblioteka.Korisnik;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,6 +19,7 @@ public class PozajmicaRepositoryTest {
      private final KorisnikRepository korisnikRepo = new KorisnikRepository();
      private final KnjigaRepository knjigaRepo = new KnjigaRepository();
      private  final PozajmicaRepository pozajmicaRepo = new PozajmicaRepository();
+     int pozajmicaId;
 
      @Test
      void canAddNewPozajmicaToDatabase() throws Exception {
@@ -23,7 +27,7 @@ public class PozajmicaRepositoryTest {
          Knjiga knjiga = TestDataGenerator.napraviRandomKnjigu();
          int korisnikId = korisnikRepo.dodajKorisnika(korisnik);
          int knjigaId = knjigaRepo.dodajKnjigu(knjiga);
-         int pozajmicaId = pozajmicaRepo.dodajPozajmicu(korisnikId, knjigaId);
+         pozajmicaId = pozajmicaRepo.dodajPozajmicu(korisnikId, knjigaId);
          assertTrue(pozajmicaId>0);
 
          Pozajmica pozajmica = pozajmicaRepo.pronadjiPozajmicuPoIdu(pozajmicaId);
@@ -32,5 +36,12 @@ public class PozajmicaRepositoryTest {
          assertEquals(knjigaId, pozajmica.getKnjigaId());
          assertNotNull(pozajmica.getDanIzdavanja());
          assertNull(pozajmica.getDanVracanja());
+     }
+
+     @AfterEach
+     void cleanUp() throws Exception {
+         pozajmicaRepo.izbrisiPozajmicuPoIdu(pozajmicaId);
+         korisnikRepo.izbrisiKorisnikaPoPrezimenuIimenu("TEST%");
+         knjigaRepo. izbrisiKnjiguPoNaslovu("TEST%");
      }
 }

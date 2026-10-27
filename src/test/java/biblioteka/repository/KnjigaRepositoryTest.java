@@ -77,11 +77,6 @@ public class KnjigaRepositoryTest {
     }
     @AfterEach
     void cleanUp() throws Exception {
-        String sql ="DELETE FROM knjiga WHERE naslov LIKE ?";
-        try(Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, "TEST%");
-            statement.executeUpdate();
-        }
+        repo.izbrisiKnjiguPoNaslovu("TEST%");
     }
 }
