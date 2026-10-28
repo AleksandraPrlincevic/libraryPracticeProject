@@ -1,6 +1,6 @@
-package biblioteka;
+package biblioteka.model;
 
-public class AudioKnjiga extends Knjiga{
+public class AudioKnjiga extends Knjiga {
 
     private double trajanje;
     public AudioKnjiga(String naslov, String autor, int brStrana, double trajanje){

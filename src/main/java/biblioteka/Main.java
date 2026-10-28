@@ -1,8 +1,10 @@
 package biblioteka;
 import java.sql.SQLException;
 import java.time.LocalDate;
+
+import biblioteka.model.Knjiga;
+import biblioteka.model.Korisnik;
 import biblioteka.repository.KnjigaRepository;
-import biblioteka.database.DatabaseConnection;
 
 public class Main {
     public static void main(String[] args) throws SQLException {

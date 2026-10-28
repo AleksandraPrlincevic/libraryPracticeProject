@@ -1,12 +1,8 @@
 package biblioteka.repository;
-import  biblioteka.Korisnik;
+import biblioteka.model.Korisnik;
 import biblioteka.TestDataGenerator;
-import biblioteka.database.DatabaseConnection;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 
 import static org.junit.jupiter.api.Assertions.*;
 

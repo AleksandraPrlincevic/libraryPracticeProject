@@ -1,9 +1,5 @@
 package biblioteka.repository;
-import biblioteka.Pozajmica;
-import biblioteka.Knjiga;
-import biblioteka.Korisnik;
-import biblioteka.repository.KorisnikRepository;
-import biblioteka.repository.KnjigaRepository;
+import biblioteka.model.Pozajmica;
 import biblioteka.database.DatabaseConnection;
 
 import java.sql.Connection;

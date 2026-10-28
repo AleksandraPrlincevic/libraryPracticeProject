@@ -1,5 +1,8 @@
 package biblioteka;
 
+import biblioteka.model.Knjiga;
+import biblioteka.model.Korisnik;
+import biblioteka.model.Pozajmica;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

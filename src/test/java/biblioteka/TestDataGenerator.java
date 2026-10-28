@@ -1,8 +1,10 @@
 package biblioteka;
 
 
+import biblioteka.model.Knjiga;
+import biblioteka.model.Korisnik;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class TestDataGenerator {

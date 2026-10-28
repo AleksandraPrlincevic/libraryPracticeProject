@@ -1,16 +1,11 @@
 package biblioteka.repository;
-import biblioteka.Pozajmica;
-import biblioteka.repository.KorisnikRepository;
-import biblioteka.repository.KnjigaRepository;
-import biblioteka.database.DatabaseConnection;
+import biblioteka.model.Pozajmica;
 import biblioteka.TestDataGenerator;
-import biblioteka.Knjiga;
-import biblioteka.Korisnik;
+import biblioteka.model.Knjiga;
+import biblioteka.model.Korisnik;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;

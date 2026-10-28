@@ -1,5 +1,9 @@
 package biblioteka;
 
+import biblioteka.model.Knjiga;
+import biblioteka.model.Korisnik;
+import biblioteka.model.Pozajmica;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

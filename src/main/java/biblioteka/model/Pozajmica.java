@@ -1,4 +1,4 @@
-package biblioteka;
+package biblioteka.model;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

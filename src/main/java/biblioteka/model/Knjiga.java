@@ -1,4 +1,4 @@
-package biblioteka;
+package biblioteka.model;
 
 public class Knjiga {
     private String naslov;

@@ -1,5 +1,5 @@
 package biblioteka.repository;
-import biblioteka.Korisnik;
+import biblioteka.model.Korisnik;
 import biblioteka.database.DatabaseConnection;
 
 import java.sql.Connection;

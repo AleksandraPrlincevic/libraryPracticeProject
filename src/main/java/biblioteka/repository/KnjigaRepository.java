@@ -1,8 +1,7 @@
 package biblioteka.repository;
-import biblioteka.Knjiga;
+import biblioteka.model.Knjiga;
 import biblioteka.database.DatabaseConnection;
 
-import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
