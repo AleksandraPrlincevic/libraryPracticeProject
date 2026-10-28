@@ -53,11 +53,7 @@ public class PozajmicaRepositoryTest {
      @AfterEach
      void cleanUp() throws Exception {
          System.out.println("ID pozajmice za brisanje: " + pozajmicaId);
-
-         boolean pozajmicaObrisana =
-                 pozajmicaRepo.izbrisiPozajmicuPoIdu(pozajmicaId);
-
-         System.out.println("Pozajmica obrisana: " + pozajmicaObrisana);
+         pozajmicaRepo.izbrisiPozajmicuPoIdu(pozajmicaId);
          korisnikRepo.izbrisiKorisnikaPoPrezimenuIimenu("TEST%");
          knjigaRepo. izbrisiKnjiguPoNaslovu("TEST%");
      }
