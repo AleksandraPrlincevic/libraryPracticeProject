@@ -22,7 +22,7 @@ public class PozajmicaRepositoryTest {
      int pozajmicaId;
 
      @Test
-     void canAddNewPozajmicaToDatabase() throws Exception {
+     void canAddNewLoanToDatabase() throws Exception {
          Korisnik korisnik = TestDataGenerator.napraviRandomKorisnika();
          Knjiga knjiga = TestDataGenerator.napraviRandomKnjigu();
          int korisnikId = korisnikRepo.dodajKorisnika(korisnik);
@@ -37,10 +37,27 @@ public class PozajmicaRepositoryTest {
          assertNotNull(pozajmica.getDanIzdavanja());
          assertNull(pozajmica.getDanVracanja());
      }
+     @Test
+     void canCloseExistingLoan() throws Exception {
+         Korisnik korisnik = TestDataGenerator.napraviRandomKorisnika();
+         Knjiga knjiga = TestDataGenerator.napraviRandomKnjigu();
+         int korisnikId = korisnikRepo.dodajKorisnika(korisnik);
+         int knjigaId = knjigaRepo.dodajKnjigu(knjiga);
+         pozajmicaId = pozajmicaRepo.dodajPozajmicu(korisnikId, knjigaId);
+         assertTrue(pozajmicaId>0);
+         assertTrue(pozajmicaRepo.zatvoriPozajmicu(pozajmicaId));
+         Pozajmica pozajmica = pozajmicaRepo.pronadjiPozajmicuPoIdu(pozajmicaId);
+         assertEquals(LocalDate.now(), pozajmica.getDanVracanja());
 
+     }
      @AfterEach
      void cleanUp() throws Exception {
-         pozajmicaRepo.izbrisiPozajmicuPoIdu(pozajmicaId);
+         System.out.println("ID pozajmice za brisanje: " + pozajmicaId);
+
+         boolean pozajmicaObrisana =
+                 pozajmicaRepo.izbrisiPozajmicuPoIdu(pozajmicaId);
+
+         System.out.println("Pozajmica obrisana: " + pozajmicaObrisana);
          korisnikRepo.izbrisiKorisnikaPoPrezimenuIimenu("TEST%");
          knjigaRepo. izbrisiKnjiguPoNaslovu("TEST%");
      }

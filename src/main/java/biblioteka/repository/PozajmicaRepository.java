@@ -53,4 +53,18 @@ public class PozajmicaRepository {
              return rowsDeleted ==1;
         }
     }
+    public boolean zatvoriPozajmicu(int pozajmicaId) throws SQLException {
+        String sql = """
+                UPDATE pozajmica
+                SET dan_vracanja = CURRENT_DATE
+                WHERE id = ?
+                AND dan_vracanja IS NULL
+                """;
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, pozajmicaId);
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated == 1;
+        }
+    }
 }
