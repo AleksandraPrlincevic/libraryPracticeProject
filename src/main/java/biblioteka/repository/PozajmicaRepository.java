@@ -63,4 +63,20 @@ public class PozajmicaRepository {
             return rowsUpdated == 1;
         }
     }
+    public boolean jeKnjigaDostupna(int knjigaId) throws SQLException {
+        String sql = """
+                SELECT NOT EXISTS(
+                SELECT 1
+                FROM pozajmica
+                WHERE knjiga_id = ?
+                AND dan_vracanja IS NULL)
+                """;
+        try(Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)){
+             ps.setInt(1, knjigaId);
+             try(ResultSet rs = ps.executeQuery()){
+                 return rs.next() && rs.getBoolean(1);
+             }
+        }
+    }
 }

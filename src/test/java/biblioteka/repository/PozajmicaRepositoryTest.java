@@ -45,6 +45,16 @@ public class PozajmicaRepositoryTest {
          assertEquals(LocalDate.now(), pozajmica.getDanVracanja());
 
      }
+     @Test
+     void canVerifyThatBookIsAvailable() throws  Exception {
+         Korisnik korisnik = TestDataGenerator.napraviRandomKorisnika();
+         Knjiga knjiga = TestDataGenerator.napraviRandomKnjigu();
+         int korisnikId = korisnikRepo.dodajKorisnika(korisnik);
+         int knjigaId = knjigaRepo.dodajKnjigu(knjiga);
+         pozajmicaId = pozajmicaRepo.dodajPozajmicu(korisnikId, knjigaId);
+         assertTrue(pozajmicaId>0);
+         assertFalse(pozajmicaRepo.jeKnjigaDostupna(knjigaId));
+     }
      @AfterEach
      void cleanUp() throws Exception {
          System.out.println("ID pozajmice za brisanje: " + pozajmicaId);
