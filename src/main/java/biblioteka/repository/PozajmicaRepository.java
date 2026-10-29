@@ -6,49 +6,56 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PozajmicaRepository {
 
     public int dodajPozajmicu(int korisnikId, int knjigaId) throws SQLException {
         String sql = "INSERT INTO pozajmica (korisnik_id, knjiga_id) VALUES (?, ?) RETURNING id";
         try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql);){
-             ps.setInt(1,korisnikId);
-             ps.setInt(2,knjigaId);
-             try(ResultSet rs = ps.executeQuery()){
-                 rs.next();
-                 int pozajmicaId =rs.getInt("id");
-                 return pozajmicaId;
-             }
+             PreparedStatement ps = connection.prepareStatement(sql);) {
+            ps.setInt(1, korisnikId);
+            ps.setInt(2, knjigaId);
+            try (ResultSet rs = ps.executeQuery()) {
+                rs.next();
+                int pozajmicaId = rs.getInt("id");
+                return pozajmicaId;
+            }
         }
     }
 
     public Pozajmica pronadjiPozajmicuPoIdu(int pozajmicaId) throws SQLException {
-        String sql = "SELECT korisnik_id, knjiga_id, dan_izdavanja, dan_vracanja FROM pozajmica WHERE id = ?";
-        try(Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement ps = connection.prepareStatement(sql)){
+        String sql = "SELECT id, korisnik_id, knjiga_id, dan_izdavanja, dan_vracanja FROM pozajmica WHERE id = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, pozajmicaId);
-            try(ResultSet rs = ps.executeQuery()){
-                if(rs.next()){
-                    return new Pozajmica (
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new Pozajmica(
+                            rs.getInt("id"),
                             rs.getInt("korisnik_id"),
                             rs.getInt("knjiga_id"),
                             rs.getDate("dan_izdavanja").toLocalDate(),
                             rs.getDate("dan_vracanja") == null ? null : rs.getDate("dan_vracanja").toLocalDate()
                     );
-                } return null;
+                }
+                return null;
             }
         }
     }
+
     public boolean izbrisiPozajmicuPoIdu(int pozajmicaId) throws SQLException {
         String sql = "DELETE FROM pozajmica WHERE id = ?";
-        try(Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql)){
-             ps.setInt(1, pozajmicaId);
-             int rowsDeleted = ps.executeUpdate();
-             return rowsDeleted ==1;
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, pozajmicaId);
+            int rowsDeleted = ps.executeUpdate();
+            return rowsDeleted == 1;
         }
     }
+
     public boolean zatvoriPozajmicu(int pozajmicaId) throws SQLException {
         String sql = """
                 UPDATE pozajmica
@@ -56,13 +63,14 @@ public class PozajmicaRepository {
                 WHERE id = ?
                 AND dan_vracanja IS NULL
                 """;
-        try(Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, pozajmicaId);
             int rowsUpdated = ps.executeUpdate();
             return rowsUpdated == 1;
         }
     }
+
     public boolean jeKnjigaDostupna(int knjigaId) throws SQLException {
         String sql = """
                 SELECT NOT EXISTS(
@@ -71,12 +79,37 @@ public class PozajmicaRepository {
                 WHERE knjiga_id = ?
                 AND dan_vracanja IS NULL)
                 """;
-        try(Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql)){
-             ps.setInt(1, knjigaId);
-             try(ResultSet rs = ps.executeQuery()){
-                 return rs.next() && rs.getBoolean(1);
-             }
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, knjigaId);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() && rs.getBoolean(1);
+            }
+        }
+    }
+
+    public List<Pozajmica> pronadjiAktivnePozajmicePoKorisnikIdu(int korisnikId) throws SQLException {
+        List<Pozajmica> listaPozajmica = new ArrayList<Pozajmica>();
+        String sql = """
+                SELECT id, korisnik_id, knjiga_id, dan_izdavanja, dan_vracanja
+                FROM pozajmica
+                WHERE korisnik_id = ?
+                AND dan_vracanja IS NULL
+                """;
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, korisnikId);
+            try (ResultSet rs = ps.executeQuery()) {
+              while(rs.next()){
+                  int id =rs.getInt("id");
+                  korisnikId = rs.getInt("korisnik_id");
+                  int knjigaId = rs.getInt("knjiga_id");
+                  LocalDate danIzdavanja = rs.getDate("dan_izdavanja").toLocalDate();
+                  LocalDate danVracanja = rs.getDate("dan_vracanja").toLocalDate();;
+                  Pozajmica pozajmica = new Pozajmica(id, korisnikId, knjigaId, danIzdavanja, danVracanja);
+                  listaPozajmica.add(pozajmica);
+              }
+            } return listaPozajmica;
         }
     }
 }

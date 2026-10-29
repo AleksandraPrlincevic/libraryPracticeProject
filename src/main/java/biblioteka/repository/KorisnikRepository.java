@@ -50,4 +50,20 @@ public class KorisnikRepository {
             return rowsDeleted >0;
         }
     }
+    public boolean postojiKorisnik(int korisnikId) throws SQLException {
+        String sql = """
+                SELECT EXISTS (
+                SELECT 1
+                FROM korisnik
+                WHERE id = ?
+                );
+                """;
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1,korisnikId);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() && rs.getBoolean(1);
+            }
+        }
+    }
 }

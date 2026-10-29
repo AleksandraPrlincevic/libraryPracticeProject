@@ -78,4 +78,20 @@ public class KnjigaRepository {
             return rowsDeleted >0;
         }
     }
+    public boolean postojiKnjiga(int knjigaId) throws SQLException {
+        String sql = """
+                SELECT EXISTS (
+                SELECT 1
+                FROM knjiga
+                WHERE id = ?
+                );
+                """;
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+             ps.setInt(1,knjigaId);
+             try (ResultSet rs = ps.executeQuery()) {
+                 return rs.next() && rs.getBoolean(1);
+             }
+        }
+    }
 }
