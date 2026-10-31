@@ -17,19 +17,18 @@ public class BibliotekaService {
     KnjigaRepository knjigaRepo = new KnjigaRepository();
     PozajmicaRepository pozajmicaRepo = new PozajmicaRepository();
 
-    public boolean izdajKnjigu(int korisnikId, int knjigaId) throws SQLException {
+    public int izdajKnjigu(int korisnikId, int knjigaId) throws SQLException {
         if (!korisnikRepo.postojiKorisnik(korisnikId)) {
             System.out.println("Korisnik sa id-em " + korisnikId + " ne postoji.");
-            return false;
+            return -1;
         } else if (!knjigaRepo.postojiKnjiga(knjigaId)) {
             System.out.println("Knjiga sa id-em " + knjigaId + " ne postoji.");
-            return false;
+            return -1;
         } else if (!pozajmicaRepo.jeKnjigaDostupna(knjigaId)) {
             System.out.println("Knjiga sa id-em " + knjigaId + " nije dostupna.");
-            return false;
+            return -1;
         }
-        pozajmicaRepo.dodajPozajmicu(korisnikId, knjigaId);
-        return true;
+        return pozajmicaRepo.dodajPozajmicu(korisnikId, knjigaId);
     }
 
     public void vratiKnjigu(int korisnikId, int... knjigaIds) throws SQLException {
