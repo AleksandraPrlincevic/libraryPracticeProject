@@ -105,7 +105,7 @@ public class PozajmicaRepository {
                   korisnikId = rs.getInt("korisnik_id");
                   int knjigaId = rs.getInt("knjiga_id");
                   LocalDate danIzdavanja = rs.getDate("dan_izdavanja").toLocalDate();
-                  LocalDate danVracanja = rs.getDate("dan_vracanja").toLocalDate();;
+                  LocalDate danVracanja = null;
                   Pozajmica pozajmica = new Pozajmica(id, korisnikId, knjigaId, danIzdavanja, danVracanja);
                   listaPozajmica.add(pozajmica);
               }
