@@ -14,6 +14,7 @@ import biblioteka.model.Knjiga;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,7 +52,24 @@ public class BibliotekaServiceTest {
         Pozajmica pozajmica = pozajmicaRepo.pronadjiPozajmicuPoIdu(pozajmicaId);
         assertEquals(LocalDate.now(), pozajmica.getDanVracanja());
     }
+    @Test
+    void canNotRentAllreadyRentedBook() throws SQLException {
+        Korisnik korisnik = TestDataGenerator.napraviRandomKorisnika();
+        Knjiga knjiga = TestDataGenerator.napraviRandomKnjigu();
+        int korisnikId = korisnikRepo.dodajKorisnika(korisnik);
+        int knjigaId = knjigaRepo.dodajKnjigu(knjiga);
+        pozajmicaId = bibliotekaS.izdajKnjigu(korisnikId, knjigaId);
+        assertTrue(pozajmicaId > 0);
 
+        Korisnik korisnik2 = TestDataGenerator.napraviRandomKorisnika();
+        int korisnik2Id = korisnikRepo.dodajKorisnika(korisnik2);
+        assertEquals(-1, bibliotekaS.izdajKnjigu(korisnik2Id, knjigaId));
+
+        List<Pozajmica> listaPozajmica = pozajmicaRepo.pronadjiAktivnePozajmicePoKorisnikIdu(korisnik2Id);
+        for(Pozajmica p: listaPozajmica) {
+            assertNotEquals(knjigaId, p.getKnjigaId());
+        };
+    }
     @AfterEach
     void cleanUp() throws  Exception {
         pozajmicaRepo.izbrisiPozajmicuPoIdu(pozajmicaId);
